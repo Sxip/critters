@@ -1,6 +1,6 @@
-import { User } from '@/database/models/User'
 import { hash } from 'bcrypt'
 import { EntitySubscriberInterface, EventSubscriber, InsertEvent } from 'typeorm'
+import { User } from '../models/User'
 
 @EventSubscriber()
 export class UserSubscriber implements EntitySubscriberInterface<User> {

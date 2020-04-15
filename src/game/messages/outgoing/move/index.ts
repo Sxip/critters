@@ -6,7 +6,7 @@ export class OutgoingMovementMessage implements IMovementMessage {
   *
   * @public
   */
-  public readonly i: string
+  public readonly i: number
 
   /**
    * Coordinates of the player.

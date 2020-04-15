@@ -1,8 +1,8 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm'
+import { MigrationInterface, QueryRunner, Table, TableForeignKey } from 'typeorm'
 
 export class CreateUsers1586889834768 implements MigrationInterface {
   public async up (queryRunner: QueryRunner): Promise<void> {
-    return queryRunner.createTable(new Table({
+    await queryRunner.createTable(new Table({
       name: 'users',
       columns: [
         {
@@ -70,6 +70,17 @@ export class CreateUsers1586889834768 implements MigrationInterface {
         },
       ],
     }), true)
+
+    /**
+     * Creates a foreign key for critters.
+     */
+    const foreignKey = new TableForeignKey({
+      columnNames: ['critterId'],
+      referencedColumnNames: ['id'],
+      referencedTableName: 'critters',
+    })
+
+    return queryRunner.createForeignKey('users', foreignKey)
   }
 
   public async down (queryRunner: QueryRunner): Promise<void> {

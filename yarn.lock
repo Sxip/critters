@@ -94,6 +94,11 @@
     "@types/qs" "*"
     "@types/serve-static" "*"
 
+"@types/faker@^4.1.11":
+  version "4.1.11"
+  resolved "https://registry.yarnpkg.com/@types/faker/-/faker-4.1.11.tgz#07911f1a39aeeaeec71d8efa0f93ef0eeafd3462"
+  integrity sha512-iL7khABWgMH53FDfQNYtbFDJXjM3G97KswtyVMUP9XBSt9c+33L1TsXI+mx+EgnoOcuSp12qZae6hLCxGcq7yg==
+
 "@types/json-schema@^7.0.3":
   version "7.0.4"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.4.tgz#38fd73ddfd9b55abb1e1b2ed578cb55bd7b7d339"
@@ -1180,7 +1185,7 @@ external-editor@^3.0.3:
     iconv-lite "^0.4.24"
     tmp "^0.0.33"
 
-faker@4.1.0:
+faker@4.1.0, faker@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/faker/-/faker-4.1.0.tgz#1e45bbbecc6774b3c195fad2835109c6d748cc3f"
   integrity sha1-HkW7vsxndLPBlfrSg1EJxtdIzD8=
@@ -3012,10 +3017,10 @@ typedi@^0.8.0:
   resolved "https://registry.yarnpkg.com/typedi/-/typedi-0.8.0.tgz#d8e203bd1d41a96e2b0a5c6295147d74b2b2d03e"
   integrity sha512-/c7Bxnm6eh5kXx2I+mTuO+2OvoWni5+rXA3PhXwVWCtJRYmz3hMok5s1AKLzoDvNAZqj/Q/acGstN0ri5aQoOA==
 
-typeorm-seeding@^1.2.0:
-  version "1.4.4"
-  resolved "https://registry.yarnpkg.com/typeorm-seeding/-/typeorm-seeding-1.4.4.tgz#026566380524502407fc0d9f2fa8a0a8719c3299"
-  integrity sha512-6ZH22E15KpWcSyy+xijwaO2E9+nE09bM63eF4d7keBYkpwWFvqMZ48ecUocA8ur5k0BAYyTmGNlCyaZlxm+uLQ==
+typeorm-seeding@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/typeorm-seeding/-/typeorm-seeding-1.5.0.tgz#53b110273a10e8bdfb3535b62c9bde51ed0c8011"
+  integrity sha512-VwzogSkaR+8McX5mfa9MhSkclDPq2CM4dzjbeKLD8gODmHhFRc1sn/5Ml0y72BklPsjii3xi63EKO9zl8wrvlQ==
   dependencies:
     chalk "^4.0.0"
     faker "4.1.0"

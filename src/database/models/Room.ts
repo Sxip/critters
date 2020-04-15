@@ -8,7 +8,7 @@ export class Room extends BaseEntity {
    * @public
    */
   @PrimaryColumn()
-  public readonly id!: string
+  public id!: string
 
   /**
    * Room name column.
@@ -16,22 +16,22 @@ export class Room extends BaseEntity {
    * @public
    */
   @Column()
-  public readonly name!: string
+  public name!: string
 
   /**
    * Room height column.
    * 
    * @public
    */
-  @Column()
-  public readonly height!: number
+  @Column({ default: 480 })
+  public height!: number
 
   /**
    * Room width column.
    * 
    * @public
    */
-  @Column()
+  @Column({ default: '850' })
   public readonly width!: number
 
   /**
@@ -39,7 +39,7 @@ export class Room extends BaseEntity {
    * 
    * @public
    */
-  @Column()
+  @Column({ default: 440 })
   public readonly startX!: number
 
   /**
@@ -47,7 +47,7 @@ export class Room extends BaseEntity {
    * 
    * @public
    */
-  @Column()
+  @Column({ default: 190 })
   public readonly startY!: number
 
   /**
@@ -55,6 +55,6 @@ export class Room extends BaseEntity {
    * 
    * @public
    */
-  @Column()
+  @Column({ default: 180 })
   public readonly startR!: number
 }
