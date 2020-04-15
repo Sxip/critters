@@ -27,6 +27,7 @@ export class CreateUsers1586889834768 implements MigrationInterface {
         {
           name: 'ticket',
           type: 'varchar',
+          generationStrategy: 'uuid',
           default: 'uuid_generate_v4()',
           isNullable: false,
           isUnique: true,
@@ -34,6 +35,25 @@ export class CreateUsers1586889834768 implements MigrationInterface {
         {
           name: 'nicknameColor',
           type: 'varchar',
+          default: '\'white\'',
+          isNullable: true,
+        },
+        {
+          name: 'critterId',
+          type: 'varchar',
+          default: '\'hamster\'',
+          isNullable: true,
+        },
+        {
+          name: 'coins',
+          type: 'integer',
+          default: 100,
+          isNullable: true,
+        },
+        {
+          name: 'gems',
+          type: 'integer',
+          default: 0,
           isNullable: true,
         },
         {

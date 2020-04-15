@@ -1,7 +1,13 @@
 import { User } from '@/database/models/User'
+import { ChatEvent, IChatEvent } from '@/game/events/ChatEvent'
 import { IJoinEvent, JoinEvent } from '@/game/events/JoinEvent'
+import { ILeaveEvent, LeaveEvent } from '@/game/events/LeaveEvent'
+import { IMoveEvent, MoveEvent } from '@/game/events/MoveEvent'
+import { OutgoingChatMessage } from '@/game/messages/outgoing/chat'
 import { OutgoingLoginMessage } from '@/game/messages/outgoing/login'
+import { OutgoingMovementMessage } from '@/game/messages/outgoing/move/login'
 import { OutgoingPlayerJoinMessage } from '@/game/messages/outgoing/playerJoin/OutgoingPlayerJoinMessage'
+import { OutgoingPlayerLeaveMessage } from '@/game/messages/outgoing/playerLeave/OutgoingPlayerJoinMessage'
 import { OutgoingJoinMessage } from '@/game/messages/outgoing/room/OutgoingJoinMessage'
 import { PlayerSocket } from '@/types/PlayerSocket'
 import { IPlayerCrumbs } from '@game/entities/IEntity'
@@ -27,6 +33,9 @@ export class Player extends PlayerBase {
    */
   protected initialize (): void {
     this.on(JoinEvent, this.onJoinRoom.bind(this))
+    this.on(LeaveEvent, this.onLeaveRoom.bind(this))
+    this.on(MoveEvent, this.onMove.bind(this))
+    this.on(ChatEvent, this.onChat.bind(this))
   }
 
   /**
@@ -39,6 +48,9 @@ export class Player extends PlayerBase {
     this.id = user.id
     this.nickname = user.nickname
     this.nicknameColor = user.nicknameColor
+    this.c = user.critterId
+    this.coins = user.coins
+    this.gems = user.gems
     return this
   }
 
@@ -48,7 +60,7 @@ export class Player extends PlayerBase {
    * @param event 
    * @param packet 
    */
-  public sendToSocket (event: string, message: object) {
+  public sendToSocket (event: string, message: object): boolean {
     return this.socket.emit(event, classToPlain(message))
   }
 
@@ -57,28 +69,31 @@ export class Player extends PlayerBase {
    * 
    * @public
    */
-  public login () {
-    return this.sendToSocket('login', new OutgoingLoginMessage({
+  public login (): void {
+    this.sendToSocket('login', new OutgoingLoginMessage({
       playerId: this.id.toString(),
       nickname: this.nickname,
       critterId: this.c,
       inventory: [],
+      nicknameColor: this.nicknameColor,
       gear: {},
-      coins: 0,
-      gems: 0,
+      coins: this.coins,
+      gems: this.gems,
     }))
   }
 
   /**
    * Emits the join room event to the player socket.
    * 
-   * @
+   * @param event 
+   * @private
    */
-  public onJoinRoom (event: IJoinEvent): void {
-    if (event.player !== this) this.sendToSocket('A', new OutgoingPlayerJoinMessage(
-      event.player.getCrumbs()
-    ))
-    else {
+  private onJoinRoom (event: IJoinEvent): void {
+    if (event.player !== this) {
+      this.sendToSocket('A', new OutgoingPlayerJoinMessage(
+        event.player.getCrumbs()
+      ))
+    } else {
       const PlayerCrumbs: IPlayerCrumbs[] = []
 
       for (const player of event.room.players) PlayerCrumbs.push(player.getCrumbs())
@@ -88,5 +103,46 @@ export class Player extends PlayerBase {
         PlayerCrumbs,
       }))
     }
+  }
+
+  /**
+   * Emits the movement event to the player socket.
+   * 
+   * @param event 
+   * @private
+   */
+  private onMove (event: IMoveEvent): void {
+    this.sendToSocket('X', new OutgoingMovementMessage({
+      i: event.sender.id,
+      x: event.x,
+      y: event.y,
+      r: event.r,
+    }))
+  }
+
+  /**
+   * Emits the chat event to the player socket.
+   * 
+   * @param event 
+   * @private
+   */
+  private onChat (event: IChatEvent): void {
+    this.sendToSocket('M', new OutgoingChatMessage({
+      i: event.sender.id,
+      n: event.sender.nickname,
+      m: event.message,
+    }))
+  }
+
+  /**
+   * Emits the room leave event to the player socket.
+   * 
+   * @param event 
+   * @private
+   */
+  private onLeaveRoom (event: ILeaveEvent): void {
+    this.sendToSocket('R', new OutgoingPlayerLeaveMessage({
+      i: event.player.id,
+    }))
   }
 }

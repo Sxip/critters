@@ -201,7 +201,7 @@
         ],
         "curly": [
             "error",
-            "multi"
+            "multi-line"
         ],
         "no-return-await": [
             "off"

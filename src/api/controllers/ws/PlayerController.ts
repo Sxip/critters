@@ -1,11 +1,13 @@
 import { Player } from '@/game/entities/player'
+import { IncomingChatMessage } from '@/game/messages/incoming/chat'
 import { IncomingLoginMessage } from '@/game/messages/incoming/login'
+import { IncomingMovementMessage } from '@/game/messages/incoming/move'
 import { IncomingJoinMessage } from '@/game/messages/incoming/room/IncomingJoinMessage'
 import { PlayerSocket } from '@/types/PlayerSocket'
 import { UserRepository } from '@repositories/user/UserRepository'
 import { RoomService } from '@services/RoomService'
 import { getLogger, Logger } from 'log4js'
-import { ConnectedSocket, MessageBody, OnConnect, OnMessage, SocketController } from 'socket-controllers'
+import { ConnectedSocket, MessageBody, OnConnect, OnDisconnect, OnMessage, SocketController } from 'socket-controllers'
 import { InjectRepository } from 'typeorm-typedi-extensions'
 
 @SocketController()
@@ -70,5 +72,44 @@ export class PlayerController {
 
     const room = this.roomService.find(message.roomId)
     if (room) room.add(socket.player, 0, 0, 0)
+  }
+
+  /**
+   * Handles player messages.
+   *
+   * @param socket
+   * @param movement
+   */
+  @OnMessage('sendMessage')
+  public sendMessage (@ConnectedSocket() socket: PlayerSocket, @MessageBody() message: IncomingChatMessage): void {
+    this.logger.info(`Chat request from ${socket.player.nickname} ${JSON.stringify(message)}`)
+
+    socket.player.sendMessage(message.message)
+  }
+
+  /**
+   * Handles movement.
+   *
+   * @param socket
+   * @param movement
+   */
+  @OnMessage('click')
+  public click (@ConnectedSocket() socket: PlayerSocket, @MessageBody() movement: IncomingMovementMessage): void {
+    this.logger.info(`Movement request from ${socket.player.nickname} ${JSON.stringify(movement)}`)
+
+    socket.player.move(movement.x, movement.y, movement.r)
+  }
+
+  /**
+   * Handles disconnection of the player.
+   *
+   * @param socket
+   */
+  @OnDisconnect()
+  public disconnect (@ConnectedSocket() socket: PlayerSocket): void {
+    this.logger.warn(`Disconnection request from ${socket.player.nickname}`)
+
+    if (socket.player.room) socket.player.room.remove(socket.player)
+    socket.disconnect()
   }
 }

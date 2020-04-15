@@ -16,6 +16,13 @@ export class OutgoingLoginMessage implements ILoginMessage {
   public nickname: string
 
   /**
+   * Player nickname color.
+   * 
+   * @public
+   */
+  public nicknameColor: string
+
+  /**
    * Player critter id.
    * 
    * @public
@@ -58,6 +65,7 @@ export class OutgoingLoginMessage implements ILoginMessage {
   public constructor (data: ILoginMessage) {
     this.playerId = data.playerId
     this.nickname = data.nickname
+    this.nicknameColor = data.nicknameColor
     this.critterId = data.critterId
     this.inventory = data.inventory
     this.gear = data.gear

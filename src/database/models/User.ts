@@ -21,14 +21,6 @@ export class User extends BaseEntity {
   public readonly nickname!: string
 
   /**
-   * Nickname color column.
-   * 
-   * @public
-   */
-  @Column({ default: 'white' })
-  public readonly nicknameColor!: string
-
-  /**
    * Password column.
    * 
    * @public
@@ -44,6 +36,38 @@ export class User extends BaseEntity {
   @Column({ unique: true })
   @Generated('uuid')
   public ticket!: string
+
+  /**
+   * Nickname color column.
+   * 
+   * @public
+   */
+  @Column()
+  public readonly nicknameColor!: string
+
+  /**
+   * Critter id column.
+   * 
+   * @public
+   */
+  @Column()
+  public readonly critterId!: string
+
+  /**
+   * Coins column.
+   * 
+   * @public
+   */
+  @Column()
+  public readonly coins!: number
+
+  /**
+   * Gems column.
+   * 
+   * @public
+   */
+  @Column()
+  public readonly gems!: number
 
   /**
    * Verify user password.
