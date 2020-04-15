@@ -1,0 +1,52 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "target": "es2018",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "outDir": "build",
+        "strict": true,
+        "allowSyntheticDefaultImports": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "noUnusedParameters": false,
+        "strictNullChecks": true,
+        "declaration": true,
+        "sourceMap": true,
+        "forceConsistentCasingInFileNames": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "removeComments": true,
+        "strictFunctionTypes": true,
+        "pretty": true,
+        "paths": {
+            "@/*": [
+                "src/*"
+            ],
+            "@database/*": [
+                "src/database/*"
+            ],
+            "@repositories/*": [
+                "src/api/repositories/*"
+            ],
+            "@models/*": [
+                "src/database/models/*"
+            ],
+            "@game/*": [
+                "src/game/*"
+            ],
+            "@services/*": [
+                "src/api/services/*"
+            ],
+            "@validators/*": [
+                "src/api/validators/*"
+            ],
+            "@config": [
+                "config/index"
+            ]
+        }
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}

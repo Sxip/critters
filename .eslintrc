@@ -1,0 +1,242 @@
+{
+    "env": {
+        "node": true,
+        "es6": true
+    },
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parserOptions": {
+        "project": "tsconfig.json",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "semi": "off",
+        "@typescript-eslint/semi": [
+            2,
+            "never"
+        ],
+        "quotes": "off",
+        "@typescript-eslint/quotes": [
+            "error",
+            "single"
+        ],
+        "space-before-function-paren": "off",
+        "@typescript-eslint/space-before-function-paren": [
+            "error",
+            "always"
+        ],
+        "no-irregular-whitespace": [
+            "error"
+        ],
+        "@typescript-eslint/no-inferrable-types": "off",
+        "indent": "off",
+        "@typescript-eslint/indent": [
+            "error",
+            2,
+            {
+                "SwitchCase": 1,
+                "flatTernaryExpressions": false,
+                "ignoredNodes": [
+                    "TSTypeParameterInstantiation"
+                ]
+            }
+        ],
+        "@typescript-eslint/member-delimiter-style": [
+            "error",
+            {
+                "multiline": {
+                    "delimiter": "none",
+                    "requireLast": false
+                },
+                "singleline": {
+                    "delimiter": "comma",
+                    "requireLast": false
+                }
+            }
+        ],
+        "no-multiple-empty-lines": [
+            "error",
+            {
+                "max": 1
+            }
+        ],
+        "one-var": [
+            "error",
+            "never"
+        ],
+        "no-cond-assign": [
+            "error",
+            "except-parens"
+        ],
+        "comma-dangle": [
+            "error",
+            "always-multiline"
+        ],
+        "eqeqeq": [
+            "error",
+            "always"
+        ],
+        "eol-last": [
+            "error",
+            "always"
+        ],
+        "new-parens": [
+            "error",
+            "always"
+        ],
+        "no-caller": [
+            "error"
+        ],
+        "no-constant-condition": [
+            "error"
+        ],
+        "no-control-regex": [
+            "error"
+        ],
+        "no-debugger": [
+            "error"
+        ],
+        "no-duplicate-case": [
+            "error"
+        ],
+        "no-eval": [
+            "error"
+        ],
+        "no-ex-assign": [
+            "error"
+        ],
+        "no-extra-boolean-cast": [
+            "error"
+        ],
+        "no-fallthrough": [
+            "error"
+        ],
+        "no-inner-declarations": [
+            "error"
+        ],
+        "no-invalid-regexp": [
+            "error",
+            {
+                "allowConstructorFlags": [
+                    "u",
+                    "y"
+                ]
+            }
+        ],
+        "no-unused-labels": [
+            "error"
+        ],
+        "no-proto": [
+            "error"
+        ],
+        "no-regex-spaces": [
+            "error"
+        ],
+        "no-self-compare": [
+            "error"
+        ],
+        "no-sparse-arrays": [
+            "error"
+        ],
+        "no-mixed-spaces-and-tabs": [
+            "error"
+        ],
+        "no-negated-in-lhs": [
+            "error"
+        ],
+        "no-new-wrappers": [
+            "error"
+        ],
+        "no-self-assign": [
+            "error"
+        ],
+        "no-this-before-super": [
+            "error"
+        ],
+        "no-with": [
+            "error"
+        ],
+        "rest-spread-spacing": [
+            "error",
+            "never"
+        ],
+        "no-trailing-spaces": [
+            "error",
+            {
+                "ignoreComments": true
+            }
+        ],
+        "no-undef-init": [
+            "error"
+        ],
+        "no-unsafe-finally": [
+            "error"
+        ],
+        "padded-blocks": [
+            "error",
+            "never"
+        ],
+        "space-in-parens": [
+            "error",
+            "never"
+        ],
+        "use-isnan": [
+            "error"
+        ],
+        "valid-typeof": [
+            "error",
+            {
+                "requireStringLiterals": true
+            }
+        ],
+        "brace-style": [
+            "error",
+            "1tbs"
+        ],
+        "curly": [
+            "error",
+            "multi"
+        ],
+        "no-return-await": [
+            "off"
+        ],
+        "@typescript-eslint/class-name-casing": [
+            "error"
+        ],
+        "@typescript-eslint/interface-name-prefix": [
+            "error",
+            {
+                "prefixWithI": "always"
+            }
+        ],
+        "handle-callback-err": [
+            "error",
+            "^(err|error)$"
+        ],
+        "max-len": [
+            "error",
+            {
+                "code": 125,
+                "comments": 125,
+                "ignoreUrls": true,
+                "ignoreTemplateLiterals": true
+            }
+        ],
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "no-array-constructor": [
+            "error"
+        ],
+        "no-unreachable": [
+            "error"
+        ],
+        "no-multi-spaces": [
+            "error"
+        ]
+    }
+}
