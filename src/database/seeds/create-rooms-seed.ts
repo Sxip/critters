@@ -2,7 +2,7 @@ import { Connection } from 'typeorm'
 import { Factory, Seeder } from 'typeorm-seeding'
 import { Room } from '../models/Room'
 
-export default class CreateRooms implements Seeder {
+export default class CreateRoomsSeed implements Seeder {
   public async run (factory: Factory, connection: Connection): Promise<void> {
     await connection
       .createQueryBuilder()
