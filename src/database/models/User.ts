@@ -1,6 +1,7 @@
 import { compare } from 'bcrypt'
-import { BaseEntity, Column, Entity, Generated, PrimaryGeneratedColumn } from 'typeorm'
+import { BaseEntity, Column, Entity, Generated, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { v4 } from 'uuid'
+import { UserItem } from './Useritem'
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -68,6 +69,38 @@ export class User extends BaseEntity {
    */
   @Column()
   public readonly gems!: number
+
+  /**
+   * Head column relation.
+   */
+  @OneToOne(() => UserItem,
+    item => item.id
+  )
+  public readonly head!: UserItem | null
+
+  /**
+   * Eyes column relation.
+   */
+  @OneToOne(() => UserItem,
+    item => item.id
+  )
+  public readonly eyes!: UserItem | null
+
+  /**
+   * Body column relation.
+   */
+  @OneToOne(() => UserItem,
+    item => item.id
+  )
+  public readonly body!: UserItem | null
+
+  /**
+   * Inventory relation.
+   */
+  @OneToMany(() => UserItem,
+    item => item.user
+  )
+  public readonly inventory!: UserItem[]
 
   /**
    * Verify user password.

@@ -1,6 +1,13 @@
+import { RoomService } from '@/api/services/RoomService'
+import { config as dotEnvConfig } from 'dotenv'
 import 'reflect-metadata'
-import './config/Env'
+import Container from 'typedi'
 import { Server } from './src/index'
+
+/**
+ * Dotenv config
+ */
+dotEnvConfig();
 
 /**
  * Initializes the application.
@@ -14,11 +21,12 @@ import { Server } from './src/index'
       .ignite()
 
     // Loads the rooms
-    server.loadRooms()
+    Container.get(RoomService).load()
 
     console.log('----------------------------------------')
     console.info(`Environment: ${server.app.get('env')}`)
     console.info(`Base URL: http://localhost:${server.app.get('port')}`)
+    console.info(`WebSocket: http://localhost:${server.app.get('ws')}/socket.io`)
     console.log('----------------------------------------')
   } catch (error) {
     console.error(`Initializing failed! Reason: ${error.message}`)

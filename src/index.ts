@@ -1,13 +1,13 @@
-import { env, logger, routing, ws } from '@config'
 import { json, urlencoded } from 'body-parser'
 import * as express from 'express'
 import { configure as configureLogger } from 'log4js'
 import * as morgan from 'morgan'
+import * as path from 'path'
 import { useContainer as useRoutingControllerContainer, useExpressServer } from 'routing-controllers'
 import { createSocketServer, useContainer as useSocketContainer } from 'socket-controllers'
 import { Container } from 'typedi'
 import { useContainer as useTypeOrmContainer } from 'typeorm'
-import { RoomService } from './api/services/RoomService'
+import config from './config'
 import { database } from './database'
 
 export class Server {
@@ -56,7 +56,8 @@ export class Server {
    * @private
    */
   private settings (): void {
-    this.app.set('port', env.app.port)
+    this.app.set('port', config.port)
+    this.app.set('ws', config.ws.port)
   }
 
   /**
@@ -65,7 +66,19 @@ export class Server {
    * @private
    */
   private configure (): void {
-    configureLogger(logger)
+    configureLogger({
+      appenders: {
+        console: {
+          type: 'console',
+        },
+      },
+      categories: {
+        default: {
+          appenders: ['console'],
+          level: 'info',
+        },
+      },
+    })
   }
 
   /**
@@ -76,7 +89,7 @@ export class Server {
   private middleware (): void {
     this.app
       .use(morgan(
-        env.isDevelopment ? 'dev' : 'combined'
+        process.env.NODE_ENV ? 'dev' : 'combined'
       ))
       .use(urlencoded({
         extended: true,
@@ -92,7 +105,10 @@ export class Server {
    */
   public async ignite (): Promise<this> {
     await this.connection()
-    await this.createServer()
+    this.createExpressServer()
+    this.createSocketServer()
+
+    await this.serve()
     return this
   }
 
@@ -119,24 +135,26 @@ export class Server {
   }
 
   /**
-   * Loads all of the rooms.
+   * Creates the websocket server.
    * 
-   * @public
+   * @private
    */
-  public loadRooms (): this {
-    const room = Container.get(RoomService)
-    room.load()
-    return this
+  private createSocketServer (): void {
+    createSocketServer(this.app.get('ws'), {
+      controllers: [path.join(__dirname, '..', 'src', 'api', 'controllers', 'ws', '/**/*.{ts,js}')],
+    })
   }
 
   /**
-   * Register application into routing controllers.
+   * Creates the express server.
    *
    * @private
    */
-  private createServer (): Promise<void> {
-    useExpressServer<Express.Application>(this.app, routing)
-    createSocketServer(env.app.wsPort, ws)
-    return this.serve()
+  private createExpressServer (): void {
+    useExpressServer<Express.Application>(this.app, {
+      ...config.routing,
+      controllers: [path.join(__dirname, '..', 'src', 'api', 'controllers', 'http', '/**/*.{ts,js}')],
+      middlewares: [path.join(__dirname, '..', 'src', 'api', 'middlewares', '/**/*.{ts,js}')],
+    })
   }
 }

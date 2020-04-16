@@ -1,5 +1,3 @@
-
-import { connectionOptions } from '@config'
 import { Connection, createConnection } from 'typeorm'
 
 /**
@@ -8,5 +6,5 @@ import { Connection, createConnection } from 'typeorm'
  * @public
  */
 export function database (): Promise<Connection> {
-  return createConnection(connectionOptions)
+  return createConnection()
 }

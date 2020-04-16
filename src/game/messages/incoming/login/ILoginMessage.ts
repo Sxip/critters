@@ -4,6 +4,6 @@
  * @interface
  */
 export interface ILoginMessage {
-  username: string
-  ticket: string
+  readonly username: string
+  readonly ticket: string
 }

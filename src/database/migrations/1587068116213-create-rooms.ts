@@ -1,9 +1,9 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm'
 
-export class CreateCritters1586889834767 implements MigrationInterface {
+export class CreateRooms1587068116213 implements MigrationInterface {
   public async up (queryRunner: QueryRunner): Promise<void> {
     return queryRunner.createTable(new Table({
-      name: 'critters',
+      name: 'rooms',
       columns: [
         {
           name: 'id',
@@ -13,13 +13,36 @@ export class CreateCritters1586889834767 implements MigrationInterface {
         {
           name: 'name',
           type: 'varchar',
-          isNullable: false,
+          isNullable: true,
         },
         {
-          name: 'type',
-          type: 'enum',
-          enum: ['critter', 'mascot'],
-          default: '\'critter\'',
+          name: 'height',
+          type: 'integer',
+          default: 480,
+          isNullable: true,
+        },
+        {
+          name: 'width',
+          type: 'integer',
+          default: 850,
+          isNullable: true,
+        },
+        {
+          name: 'startX',
+          type: 'integer',
+          default: 440,
+          isNullable: true,
+        },
+        {
+          name: 'startY',
+          type: 'integer',
+          default: 190,
+          isNullable: true,
+        },
+        {
+          name: 'startR',
+          type: 'integer',
+          default: 180,
           isNullable: true,
         },
         {
@@ -39,6 +62,6 @@ export class CreateCritters1586889834767 implements MigrationInterface {
   }
 
   public async down (queryRunner: QueryRunner): Promise<void> {
-    return queryRunner.dropTable('critters')
+    return queryRunner.dropTable('rooms')
   }
 }

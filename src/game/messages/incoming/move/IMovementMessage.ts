@@ -4,7 +4,7 @@
  * @interface
  */
 export interface IMovementMessage {
-  x: number
-  y: number
-  r: number
+  readonly x: number
+  readonly y: number
+  readonly r: number
 }

@@ -4,5 +4,5 @@
  * @interface
  */
 export interface IJoinMessage {
-  roomId: string
+  readonly roomId: string
 }

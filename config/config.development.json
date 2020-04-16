@@ -1,0 +1,19 @@
+{
+  "port": 80,
+  "routing": {
+    "cors": true,
+    "routePrefix": "api",
+    "validation": true,
+    "classTransformer": true,
+    "defaultErrorHandler": false
+  },
+  "ws": {
+    "port": 8080
+  },
+  "database": {
+    "host": "",
+    "database": "",
+    "username": "",
+    "password": ""
+  }
+}
