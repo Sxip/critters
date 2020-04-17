@@ -56,6 +56,15 @@ export class Player extends PlayerBase {
     this.head = user.head?.itemId
     this.mask = user.eyes?.itemId
     this.mask = user.body?.itemId
+
+    for (const item of user.inventory) {
+      this.inventory.add({
+        uid: item.id.toString(),
+        itemId: item.item.id.toString(),
+        slot: item.item.slot,
+        uses: 0,
+      })
+    }
     return this
   }
 
@@ -79,9 +88,9 @@ export class Player extends PlayerBase {
       playerId: this.id.toString(),
       nickname: this.nickname,
       critterId: this.c,
-      inventory: [],
+      inventory: this.inventory.getInventory(),
       nicknameColor: this.nicknameColor,
-      gear: {},
+      gear: this.getGear(),
       coins: this.coins,
       gems: this.gems,
     }))

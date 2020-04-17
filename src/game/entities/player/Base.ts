@@ -4,6 +4,8 @@ import { IRoom } from '@/game/rooms/IRoom'
 import { EventEmitter } from 'events'
 import { IPlayerCrumbs, IPlayerGear } from '../IEntity'
 import { IEntityPlayer } from '../IEntityPlayer'
+import { IInventory } from './inventory/IInventory'
+import { Inventory } from './inventory/Inventory'
 
 export abstract class PlayerBase extends EventEmitter implements IEntityPlayer {
   /**
@@ -81,6 +83,13 @@ export abstract class PlayerBase extends EventEmitter implements IEntityPlayer {
    * @public
    */
   public room!: IRoom
+
+  /**
+   * Player inventory.
+   * 
+   * @public
+   */
+  public readonly inventory: IInventory = new Inventory()
 
   /**
    * Initializes the player events.

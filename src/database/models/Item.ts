@@ -49,4 +49,12 @@ export class Item {
    */
   @Column()
   public readonly cost!: number
+
+  /**
+   * Uses column.
+   * 
+   * @public
+   */
+  @Column()
+  public readonly uses!: number
 }

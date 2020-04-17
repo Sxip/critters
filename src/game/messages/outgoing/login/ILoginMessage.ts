@@ -1,3 +1,5 @@
+import { IItem } from '@/game/items/IItem'
+
 /**
  * Login message interface.
  * 
@@ -8,7 +10,7 @@ export interface ILoginMessage {
   readonly nickname: string
   readonly nicknameColor: string
   readonly critterId: string
-  readonly inventory: object[]
+  readonly inventory: IItem[]
   readonly gear: object
   readonly coins: number
   readonly gems: number
