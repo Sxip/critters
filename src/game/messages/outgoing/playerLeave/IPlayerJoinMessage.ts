@@ -1,3 +1,3 @@
 export interface IPlayerLeaveMessage {
-  i: number
+  readonly i: number
 }

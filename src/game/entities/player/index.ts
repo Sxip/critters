@@ -51,6 +51,11 @@ export class Player extends PlayerBase {
     this.c = user.critterId
     this.coins = user.coins
     this.gems = user.gems
+
+    // Current equipped items
+    this.head = user.head?.itemId
+    this.mask = user.eyes?.itemId
+    this.mask = user.body?.itemId
     return this
   }
 

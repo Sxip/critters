@@ -1,4 +1,4 @@
-import { IEntityPlayer } from '@game/entities/IEntityPlayer';
+import { IEntityPlayer } from '@game/entities/IEntityPlayer'
 
 /**
  * Room interface.
@@ -6,8 +6,8 @@ import { IEntityPlayer } from '@game/entities/IEntityPlayer';
  * @interface
  */
 export interface IRoom {
-  id: string
-  players: Set<IEntityPlayer>
+  readonly id: string
+  readonly players: Set<IEntityPlayer>
 
   add(player: IEntityPlayer, x: number, y: number, r: number): void
   remove(player: IEntityPlayer): void

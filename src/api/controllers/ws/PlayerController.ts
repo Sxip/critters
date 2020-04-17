@@ -55,6 +55,7 @@ export class PlayerController {
       const user = await this.userRepository.findByTicket(message.username, message.ticket)
       this.logger.info(`Successfully authenticated ticket ${message.ticket} for user ${user.nickname}`)
 
+      console.log(user)
       socket.player.model(user).login()
     } catch (error) {
       this.logger.error(`Failed authenticating ticket ${message.ticket} ${error.message}`)

@@ -6,6 +6,6 @@ import { IPlayerCrumbs } from '@/game/entities/IEntity';
  * @interface
  */
 export interface IRoomJoinMessage {
-  RoomId: string
-  PlayerCrumbs: IPlayerCrumbs[]
+  readonly RoomId: string
+  readonly PlayerCrumbs: IPlayerCrumbs[]
 }

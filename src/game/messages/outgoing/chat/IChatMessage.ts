@@ -4,7 +4,7 @@
  * @interface
  */
 export interface IChatMessage {
-  i: number
-  n: string
-  m: string
+  readonly i: number
+  readonly n: string
+  readonly m: string
 }

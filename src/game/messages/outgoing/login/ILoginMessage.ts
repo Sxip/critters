@@ -4,12 +4,12 @@
  * @interface
  */
 export interface ILoginMessage {
-  playerId: string
-  nickname: string
-  nicknameColor: string
-  critterId: string
-  inventory: object[]
-  gear: object
-  coins: number
-  gems: number
+  readonly playerId: string
+  readonly nickname: string
+  readonly nicknameColor: string
+  readonly critterId: string
+  readonly inventory: object[]
+  readonly gear: object
+  readonly coins: number
+  readonly gems: number
 }

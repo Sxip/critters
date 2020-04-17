@@ -31,6 +31,13 @@ export class UserRepository extends Repository<User> implements IUserRepository 
    * @public
    */
   public findByTicket (username: string, ticket: string): Promise<User> {
-    return this.findOneOrFail({ where: { ticket, username } })
+    return this.findOneOrFail({
+      where: { ticket, username },
+      relations: [
+        'inventory',
+        'inventory.item',
+        'head',
+      ],
+    })
   }
 }

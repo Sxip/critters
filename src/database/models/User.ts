@@ -1,5 +1,5 @@
 import { compare } from 'bcrypt'
-import { BaseEntity, Column, Entity, Generated, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { BaseEntity, Column, Entity, Generated, OneToMany, OneToOne, PrimaryGeneratedColumn, JoinColumn } from 'typeorm'
 import { v4 } from 'uuid'
 import { UserItem } from './Useritem'
 
@@ -76,7 +76,8 @@ export class User extends BaseEntity {
   @OneToOne(() => UserItem,
     item => item.id
   )
-  public readonly head!: UserItem | null
+  @JoinColumn({ name: 'head' })
+  public readonly head?: UserItem
 
   /**
    * Eyes column relation.
@@ -84,7 +85,8 @@ export class User extends BaseEntity {
   @OneToOne(() => UserItem,
     item => item.id
   )
-  public readonly eyes!: UserItem | null
+  @JoinColumn({ name: 'eyes' })
+  public readonly eyes?: UserItem
 
   /**
    * Body column relation.
@@ -92,7 +94,8 @@ export class User extends BaseEntity {
   @OneToOne(() => UserItem,
     item => item.id
   )
-  public readonly body!: UserItem | null
+  @JoinColumn({ name: 'body' })
+  public readonly body?: UserItem
 
   /**
    * Inventory relation.

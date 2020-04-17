@@ -34,7 +34,7 @@ export class UserItem extends BaseEntity {
    * @public
    */
   @ManyToOne(() => User, user =>
-    user.inventory
+    user.id
   )
   public readonly user!: User
 

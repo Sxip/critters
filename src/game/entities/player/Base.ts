@@ -32,11 +32,11 @@ export abstract class PlayerBase extends EventEmitter implements IEntityPlayer {
    * 
    * @public
    */
-  public cape!: string
-  public mask!: string
-  public ears!: string
-  public body!: string
-  public head!: string
+  public cape?: string
+  public mask?: string
+  public ears?: string
+  public body?: string
+  public head?: string
 
   /**
    * Coordinates of the player.
