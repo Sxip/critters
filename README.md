@@ -7,8 +7,7 @@
 
 ### About
 
-Critters is a server implementation of [Box Critters](https://boxcritters.com) written in [TypeScript](https://www.typescriptlang.org).
-
+Critters is a server implementation of [Box Critters](https://boxcritters.com) written entirely using [TypeScript](https://www.typescriptlang.org). The aim of this project is to create a server that is both fun and easy to use.
 
 ### Showcase
 
