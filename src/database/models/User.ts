@@ -89,6 +89,24 @@ export class User extends BaseEntity {
   public readonly eyes?: UserItem
 
   /**
+   * Ears column relation.
+   */
+  @OneToOne(() => UserItem,
+    item => item.id
+  )
+  @JoinColumn({ name: 'ears' })
+  public readonly ears?: UserItem
+
+  /**
+   * Mask column relation.
+   */
+  @OneToOne(() => UserItem,
+    item => item.id
+  )
+  @JoinColumn({ name: 'mask' })
+  public readonly mask?: UserItem
+
+  /**
    * Body column relation.
    */
   @OneToOne(() => UserItem,
@@ -96,6 +114,24 @@ export class User extends BaseEntity {
   )
   @JoinColumn({ name: 'body' })
   public readonly body?: UserItem
+
+  /**
+   * Pack column relation.
+   */
+  @OneToOne(() => UserItem,
+    item => item.id
+  )
+  @JoinColumn({ name: 'pack' })
+  public readonly pack?: UserItem
+
+  /**
+   * Hand column relation.
+   */
+  @OneToOne(() => UserItem,
+    item => item.id
+  )
+  @JoinColumn({ name: 'hand' })
+  public readonly hand?: UserItem
 
   /**
    * Inventory relation.

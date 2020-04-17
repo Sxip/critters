@@ -4,7 +4,7 @@ import { IRoom } from '@/game/rooms/IRoom'
 export const JoinEvent = 'event-join'
 
 export interface IJoinEvent {
-  player: IEntityPlayer
-  room: IRoom
+  readonly player: IEntityPlayer
+  readonly room: IRoom
 }
 

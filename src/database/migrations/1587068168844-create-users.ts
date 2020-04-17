@@ -69,7 +69,31 @@ export class CreateUsers1587068168844 implements MigrationInterface {
           isNullable: true,
         },
         {
+          name: 'ears',
+          type: 'bigint',
+          isUnique: true,
+          isNullable: true,
+        },
+        {
+          name: 'mask',
+          type: 'bigint',
+          isUnique: true,
+          isNullable: true,
+        },
+        {
           name: 'body',
+          type: 'bigint',
+          isUnique: true,
+          isNullable: true,
+        },
+        {
+          name: 'pack',
+          type: 'bigint',
+          isUnique: true,
+          isNullable: true,
+        },
+        {
+          name: 'hand',
           type: 'bigint',
           isUnique: true,
           isNullable: true,
@@ -143,12 +167,32 @@ export class CreateUsers1587068168844 implements MigrationInterface {
         referencedTableName: 'users_items',
       }),
       new TableForeignKey({
+        columnNames: ['eyes'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'users_items',
+      }),
+      new TableForeignKey({
+        columnNames: ['ears'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'users_items',
+      }),
+      new TableForeignKey({
+        columnNames: ['mask'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'users_items',
+      }),
+      new TableForeignKey({
         columnNames: ['body'],
         referencedColumnNames: ['id'],
         referencedTableName: 'users_items',
       }),
       new TableForeignKey({
-        columnNames: ['eyes'],
+        columnNames: ['pack'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'users_items',
+      }),
+      new TableForeignKey({
+        columnNames: ['hand'],
         referencedColumnNames: ['id'],
         referencedTableName: 'users_items',
       }),

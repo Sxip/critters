@@ -17,8 +17,9 @@ export class UserSubscriber implements EntitySubscriberInterface<User> {
    * Called before post insertion.
    * 
    * @param event 
+   * @public
    */
-  async beforeInsert (event: InsertEvent<User>) {
+  public async beforeInsert (event: InsertEvent<User>) {
     event.entity.password = await hash(event.entity.password, 8)
   }
 }

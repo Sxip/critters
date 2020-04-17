@@ -4,7 +4,7 @@ import { IRoom } from '@game/rooms/IRoom'
 export const LeaveEvent = 'event-leave'
 
 export interface ILeaveEvent {
-  player: IEntityPlayer
-  room: IRoom
+  readonly player: IEntityPlayer
+  readonly room: IRoom
 }
 
