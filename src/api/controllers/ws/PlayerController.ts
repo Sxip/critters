@@ -1,5 +1,6 @@
 import { PluginManager } from '@/core/PluginManager'
 import { Player } from '@/game/entities/player'
+import { IncomingMessagesTypes } from '@/game/messages/incoming'
 import { IncomingChatMessage } from '@/game/messages/incoming/chat'
 import { IncomingCodeMessage } from '@/game/messages/incoming/code'
 import { IncomingLoginMessage } from '@/game/messages/incoming/login'
@@ -51,7 +52,7 @@ export class PlayerController {
    * @param message
    * @public
    */
-  @OnMessage('login')
+  @OnMessage(IncomingMessagesTypes.LOGIN)
   public async login (@ConnectedSocket() socket: PlayerSocket, @MessageBody() message: IncomingLoginMessage): Promise<void> {
     this.logger.warn(`${socket.id} login request with ticket ${message.ticket}`)
 
@@ -71,9 +72,11 @@ export class PlayerController {
   * @param socket
   * @public
   */
-  @OnMessage('joinRoom')
+  @OnMessage(IncomingMessagesTypes.JOIN_ROOM)
   public join (@ConnectedSocket() socket: PlayerSocket, @MessageBody() message: IncomingJoinMessage): void {
     this.logger.info(`Room join request from ${socket.player.nickname} room: ${message.roomId}`)
+
+    PluginManager.handleIncomingMessage(IncomingMessagesTypes.JOIN_ROOM, message, socket.player)
 
     const room = this.roomService.find(message.roomId)
     if (room) room.add(socket.player, 0, 0, 0)
@@ -86,7 +89,7 @@ export class PlayerController {
    * @param movement
    * @public
    */
-  @OnMessage('sendMessage')
+  @OnMessage(IncomingMessagesTypes.CHAT)
   public sendMessage (@ConnectedSocket() socket: PlayerSocket, @MessageBody() message: IncomingChatMessage): void {
     this.logger.info(`Chat request from ${socket.player.nickname} ${JSON.stringify(message)}`)
 
@@ -99,7 +102,7 @@ export class PlayerController {
    * @param socket
    * @param movement
    */
-  @OnMessage('click')
+  @OnMessage(IncomingMessagesTypes.CLICK)
   public click (@ConnectedSocket() socket: PlayerSocket, @MessageBody() movement: IncomingMovementMessage): void {
     this.logger.info(`Movement request from ${socket.player.nickname} ${JSON.stringify(movement)}`)
 
@@ -113,8 +116,10 @@ export class PlayerController {
    * @param message
    * @public
    */
-  @OnMessage('code')
+  @OnMessage(IncomingMessagesTypes.CODE)
   public code (@ConnectedSocket() socket: PlayerSocket, @MessageBody() message: IncomingCodeMessage) {
+    this.logger.info(`Command ${message.code} request from ${socket.player.nickname}`)
+
     PluginManager.handleCommand({
       sender: socket.player,
       code: message.code,

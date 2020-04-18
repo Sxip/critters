@@ -1,6 +1,9 @@
 import { ICommandInformation } from '@/decorators/Command'
+import { IIncomingMessageInformation } from '@/decorators/IncomingMessage'
 import { ILoadedPlugin, IPlugin } from '@/decorators/Plugin'
+import IEntity from '@/game/entities/IEntity'
 import { ICodeEvent } from '@/game/events/CodeEvent'
+import { IncomingMessagesTypes } from '@/game/messages/incoming'
 import { readdir, stat } from 'fs'
 import { getLogger, Logger } from 'log4js'
 import * as path from 'path'
@@ -21,14 +24,22 @@ export class PluginManager {
   private static readonly logger: Logger = getLogger('PluginManager')
 
   /**
-   * Stores a map of the loaded plugins,
+   * Stores a map of the loaded plugins.
    * 
    * @public
    */
   public static readonly plugins: Map<string, IPlugin<any>> = new Map<string, IPlugin<any>>()
 
   /**
-   * Stores a map of the loaded commands,
+   * Stores incoming messages hooks.
+   * 
+   * @public
+   */
+  public static readonly incoming: Map<string, IIncomingMessageInformation[]> = new Map<string,
+    IIncomingMessageInformation[]>()
+
+  /**
+   * Stores a map of the loaded commands.
    * 
    * @public
    */
@@ -89,8 +100,24 @@ export class PluginManager {
   }
 
   /**
+   * Loads a new incoming message hook.
+   * 
+   * @param message
+   * @public
+   */
+  public static loadIncomingMessage (message: IIncomingMessageInformation): void {
+    if (this.incoming.has(message.type)) {
+      return this.logger.error(`Command ${message.type} already exists!`)
+    }
+
+    if (!this.incoming.has(message.type)) this.incoming.set(message.type, [])
+    this.incoming.get(message.type)?.push(message)
+  }
+
+  /**
    * Handles a command that has been executed.
    * 
+   * @param code 
    * @public
    */
   public static handleCommand (code: ICodeEvent): void {
@@ -107,6 +134,32 @@ export class PluginManager {
         }
 
         target.instance[command.method].call(target.instance, event)
+      }
+    }
+  }
+
+  /**
+   * Handles incoming message events from the socket player.
+   * 
+   * @param type 
+   * @param message 
+   * @param player 
+   * @public
+   */
+  public static handleIncomingMessage (type: IncomingMessagesTypes, message: any, player?: IEntity): void {
+    const incomingHook = this.incoming.get(type)
+
+    if (incomingHook) {
+      for (const hook of incomingHook) {
+        const target = this.plugins.get(hook.target)
+
+        if (target) {
+          try {
+            target.instance[hook.method].call(target.instance, message, player)
+          } catch (error) {
+            this.logger.error(`Failed handling incoming message hooks! ${error.message}`)
+          }
+        }
       }
     }
   }

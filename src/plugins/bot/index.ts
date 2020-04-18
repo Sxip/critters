@@ -1,8 +1,11 @@
 import { Command } from '@/decorators/Command'
+import { IncomingMessage } from '@/decorators/IncomingMessage'
 import { Plugin } from '@/decorators/Plugin'
+import { IEntityPlayer } from '@/game/entities/IEntityPlayer'
 import { ICodeEvent } from '@/game/events/CodeEvent'
 import { IMoveEvent, MoveEvent } from '@/game/events/MoveEvent'
-import { DummyPlayer } from './Dummy'
+import { IncomingJoinMessage } from '@/game/messages/incoming/room/IncomingJoinMessage'
+import { Bot } from './Bot'
 
 @Plugin({
   name: 'Bot',
@@ -15,6 +18,16 @@ export default class BotPlugin {
    * @private
    */
   private idCounter: number = -500
+
+  /**
+   * Handles login message.
+   * 
+   * @public
+   */
+  @IncomingMessage('joinRoom')
+  public onIncomingLoginMessage (message: IncomingJoinMessage, player: IEntityPlayer): void {
+    console.info(`Room join request from ${player.nickname}`)
+  }
 
   /**
    * Bot command.
@@ -30,7 +43,7 @@ export default class BotPlugin {
 
     const id = --this.idCounter
 
-    const bot = new DummyPlayer(nickname, id)
+    const bot = new Bot(id, nickname)
 
     bot.on(MoveEvent, (mvEvent: IMoveEvent) => {
       if (mvEvent.sender === event.sender) {
@@ -44,7 +57,8 @@ export default class BotPlugin {
 
     event.sender.room.add(
       bot,
-      x + event.sender.x, y + event.sender.y,
+      x + event.sender.x,
+      y + event.sender.y,
       event.sender.r
     )
 

@@ -1,12 +1,13 @@
 import { PlayerBase } from '@/game/entities/player/Base'
 import { ChatEvent, IChatEvent } from '@/game/events/ChatEvent'
 
-export class DummyPlayer extends PlayerBase {
+export class Bot extends PlayerBase {
   constructor (
+    readonly id: number,
     readonly nickname: string,
-    readonly id: number
   ) {
     super()
+
     this.body = 'monk'
     this.head = 'pot'
     this.nicknameColor = 'orange'
@@ -28,7 +29,7 @@ export class DummyPlayer extends PlayerBase {
    * @private
    */
   private onChat (event: IChatEvent): void {
-    if (event.sender !== this && !(event.sender instanceof DummyPlayer)) {
+    if (event.sender !== this && !(event.sender instanceof Bot)) {
       this.sendMessage('you said: ' + event.message)
     }
   }
