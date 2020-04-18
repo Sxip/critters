@@ -46,7 +46,8 @@ export class PluginManager {
       if (!((await promisify(stat)(this.PATH)).isDirectory())) continue
 
       // Todo: check the file extensions
-      await import(`${this.PATH}/${path}`)
+      const plugin = await import(`${this.PATH}/${path}`)
+      new plugin.default()
     }
   }
 

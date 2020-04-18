@@ -1,9 +1,10 @@
+import 'reflect-metadata'
+
 import { RoomService } from '@/api/services/RoomService'
 import { PluginManager } from '@/core/PluginManager'
-import '@/plugins/TestPlugin'
 import { config as dotEnvConfig } from 'dotenv'
-import 'reflect-metadata'
 import Container from 'typedi'
+
 import { Server } from './src/index'
 
 /**
