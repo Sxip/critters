@@ -1,5 +1,7 @@
+import { PluginManager } from '@/core/PluginManager'
 import { Player } from '@/game/entities/player'
 import { IncomingChatMessage } from '@/game/messages/incoming/chat'
+import { IncomingCodeMessage } from '@/game/messages/incoming/code'
 import { IncomingLoginMessage } from '@/game/messages/incoming/login'
 import { IncomingMovementMessage } from '@/game/messages/incoming/move'
 import { IncomingJoinMessage } from '@/game/messages/incoming/room/IncomingJoinMessage'
@@ -33,6 +35,7 @@ export class PlayerController {
    * Handles incoming connections.
    *
    * @param socket
+   * @public
    */
   @OnConnect()
   public connection (@ConnectedSocket() socket: PlayerSocket): void {
@@ -46,6 +49,7 @@ export class PlayerController {
    *
    * @param socket
    * @param message
+   * @public
    */
   @OnMessage('login')
   public async login (@ConnectedSocket() socket: PlayerSocket, @MessageBody() message: IncomingLoginMessage): Promise<void> {
@@ -55,7 +59,6 @@ export class PlayerController {
       const user = await this.userRepository.findByTicket(message.username, message.ticket)
       this.logger.info(`Successfully authenticated ticket ${message.ticket} for user ${user.nickname}`)
 
-      console.log(user)
       socket.player.model(user).login()
     } catch (error) {
       this.logger.error(`Failed authenticating ticket ${message.ticket} ${error.message}`)
@@ -66,6 +69,7 @@ export class PlayerController {
   * Handles room joining.
   *
   * @param socket
+  * @public
   */
   @OnMessage('joinRoom')
   public join (@ConnectedSocket() socket: PlayerSocket, @MessageBody() message: IncomingJoinMessage): void {
@@ -80,6 +84,7 @@ export class PlayerController {
    *
    * @param socket
    * @param movement
+   * @public
    */
   @OnMessage('sendMessage')
   public sendMessage (@ConnectedSocket() socket: PlayerSocket, @MessageBody() message: IncomingChatMessage): void {
@@ -102,13 +107,29 @@ export class PlayerController {
   }
 
   /**
+   * Handles commands.
+   * 
+   * @param socket 
+   * @param message
+   * @public
+   */
+  @OnMessage('code')
+  public code (@ConnectedSocket() socket: PlayerSocket, @MessageBody() message: IncomingCodeMessage) {
+    PluginManager.handleCommand({
+      sender: socket.player,
+      code: message.code,
+      options: message.options,
+    })
+  }
+
+  /**
    * Handles disconnection of the player.
    *
    * @param socket
    */
   @OnDisconnect()
   public disconnect (@ConnectedSocket() socket: PlayerSocket): void {
-    this.logger.warn(`Disconnection request from ${socket.player.nickname}`)
+    this.logger.warn(`Disconnection request from ${socket.id}`)
 
     if (socket.player.room) socket.player.room.remove(socket.player)
     socket.disconnect()

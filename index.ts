@@ -1,4 +1,6 @@
 import { RoomService } from '@/api/services/RoomService'
+import { PluginManager } from '@/core/PluginManager'
+import '@/plugins/TestPlugin'
 import { config as dotEnvConfig } from 'dotenv'
 import 'reflect-metadata'
 import Container from 'typedi'
@@ -21,7 +23,10 @@ dotEnvConfig();
       .ignite()
 
     // Loads the rooms
-    Container.get(RoomService).load()
+    await Container.get(RoomService).load()
+
+    // Loads all of the plugins
+    await PluginManager.loadAll()
 
     console.log('----------------------------------------')
     console.info(`Environment: ${server.app.get('env')}`)

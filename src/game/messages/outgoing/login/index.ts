@@ -1,4 +1,5 @@
 import { ILoginMessage } from './ILoginMessage'
+import { IItem } from '@/game/items/IItem'
 
 export class OutgoingLoginMessage implements ILoginMessage {
   /**
@@ -6,56 +7,56 @@ export class OutgoingLoginMessage implements ILoginMessage {
    * 
    * @public
    */
-  public playerId: string
+  public readonly playerId: string
 
   /**
    * Player nickname.
    * 
    * @public
    */
-  public nickname: string
+  public readonly nickname: string
 
   /**
    * Player nickname color.
    * 
    * @public
    */
-  public nicknameColor: string
+  public readonly nicknameColor: string
 
   /**
    * Player critter id.
    * 
    * @public
    */
-  public critterId: string
+  public readonly critterId: string
 
   /**
    * Player inventory.
    * 
    * @public
    */
-  public inventory: object[]
+  public readonly inventory: IItem[]
 
   /**
    * Player gear.
    * 
    * @public
    */
-  public gear: object
+  public readonly gear: object
 
   /**
    * Player coins.
    * 
    * @public
    */
-  public coins: number
+  public readonly coins: number
 
   /**
    * Player gems.
    * 
    * @public
    */
-  public gems: number
+  public readonly gems: number
 
   /**
    * Constructor.
