@@ -25,7 +25,7 @@ export default class BotPlugin {
    * @public
    */
   @IncomingMessage('joinRoom')
-  public onIncomingLoginMessage (message: IncomingJoinMessage, player: IEntityPlayer): void {
+  public onIncomingJoinMessage (message: IncomingJoinMessage, player: IEntityPlayer): void {
     console.info(`Room join request from ${player.nickname}`)
   }
 
