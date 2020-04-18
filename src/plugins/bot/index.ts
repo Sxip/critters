@@ -20,7 +20,7 @@ export default class BotPlugin {
   private idCounter: number = -500
 
   /**
-   * Handles login message.
+   * Handles join room message.
    * 
    * @public
    */
