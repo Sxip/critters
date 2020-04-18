@@ -56,6 +56,8 @@ export class PlayerController {
   public async login (@ConnectedSocket() socket: PlayerSocket, @MessageBody() message: IncomingLoginMessage): Promise<void> {
     this.logger.warn(`${socket.id} login request with ticket ${message.ticket}`)
 
+    PluginManager.handleIncomingMessage(IncomingMessagesTypes.LOGIN, message, socket.player)
+
     try {
       const user = await this.userRepository.findByTicket(message.username, message.ticket)
       this.logger.info(`Successfully authenticated ticket ${message.ticket} for user ${user.nickname}`)
@@ -93,6 +95,8 @@ export class PlayerController {
   public sendMessage (@ConnectedSocket() socket: PlayerSocket, @MessageBody() message: IncomingChatMessage): void {
     this.logger.info(`Chat request from ${socket.player.nickname} ${JSON.stringify(message)}`)
 
+    PluginManager.handleIncomingMessage(IncomingMessagesTypes.CHAT, message, socket.player)
+
     socket.player.sendMessage(message.message)
   }
 
@@ -103,10 +107,12 @@ export class PlayerController {
    * @param movement
    */
   @OnMessage(IncomingMessagesTypes.CLICK)
-  public click (@ConnectedSocket() socket: PlayerSocket, @MessageBody() movement: IncomingMovementMessage): void {
-    this.logger.info(`Movement request from ${socket.player.nickname} ${JSON.stringify(movement)}`)
+  public click (@ConnectedSocket() socket: PlayerSocket, @MessageBody() message: IncomingMovementMessage): void {
+    this.logger.info(`Movement request from ${socket.player.nickname} ${JSON.stringify(message)}`)
 
-    socket.player.move(movement.x, movement.y, movement.r)
+    PluginManager.handleIncomingMessage(IncomingMessagesTypes.CLICK, message, socket.player)
+
+    socket.player.move(message.x, message.y, message.r)
   }
 
   /**

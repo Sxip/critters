@@ -133,7 +133,11 @@ export class PluginManager {
           code: code.code,
         }
 
-        target.instance[command.method].call(target.instance, event)
+        try {
+          target.instance[command.method].call(target.instance, event)
+        } catch (error) {
+          this.logger.error(`Failed handling command! ${error.message}`)
+        }
       }
     }
   }
