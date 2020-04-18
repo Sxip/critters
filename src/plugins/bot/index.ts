@@ -23,20 +23,31 @@ export default class BotPlugin {
    * @public
    */
   @Command('bot')
-  public testing (event: ICodeEvent) {
+  public onBotCommand (event: ICodeEvent) {
     const x = Number(event.options[0]) || 0
     const y = Number(event.options[1]) || 0
-    const nickname = event.options[2] || 'Bot'
+    const nickname = event.options[2] || 'bot'
 
     const id = --this.idCounter
 
     const bot = new DummyPlayer(nickname, id)
 
     bot.on(MoveEvent, (mvEvent: IMoveEvent) => {
-      if (mvEvent.sender === event.sender) bot.move(mvEvent.x + x, mvEvent.y + y, mvEvent.r)
+      if (mvEvent.sender === event.sender) {
+        bot.move(
+          mvEvent.x + x,
+          mvEvent.y + y,
+          mvEvent.r
+        )
+      }
     })
 
-    event.sender.room.add(bot, x + event.sender.x, y + event.sender.y, event.sender.r)
+    event.sender.room.add(
+      bot,
+      x + event.sender.x, y + event.sender.y,
+      event.sender.r
+    )
+
     bot.sendMessage(`Hello ${event.sender.nickname}!`)
   }
 }
