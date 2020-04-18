@@ -17,15 +17,16 @@ export default class BotPlugin {
   private idCounter: number = -500
 
   /**
-   * Testing command.
+   * Bot command.
    * 
+   * @param event 
    * @public
    */
   @Command('bot')
   public testing (event: ICodeEvent) {
-    const x = Number(event.options[0])
-    const y = Number(event.options[1])
-    const nickname = event.options[2]
+    const x = Number(event.options[0]) || 0
+    const y = Number(event.options[1]) || 0
+    const nickname = event.options[2] || 'Bot'
 
     const id = --this.idCounter
 

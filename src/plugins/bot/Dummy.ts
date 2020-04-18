@@ -18,7 +18,6 @@ export class DummyPlayer extends PlayerBase {
    * @protected
    */
   protected initialize () {
-    console.log('called')
     this.on(ChatEvent, this.onChat.bind(this))
   }
 
