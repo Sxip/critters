@@ -1,7 +1,10 @@
+import { RoomService } from '@/api/services/RoomService'
+import { Trigger, TriggerTypes } from '@/database/models/Trigger'
 import { IEntityPlayer } from '@/game/entities/IEntityPlayer'
 import { IJoinEvent, JoinEvent } from '@game/events/JoinEvent'
 import { ILeaveEvent, LeaveEvent } from '@game/events/LeaveEvent'
 import { EventEmitter } from 'events'
+import Container from 'typedi'
 import { IRoom } from './IRoom'
 
 export class Room extends EventEmitter implements IRoom {
@@ -20,6 +23,11 @@ export class Room extends EventEmitter implements IRoom {
    */
   public constructor (
     public readonly id: string,
+    public readonly startX: number,
+    public readonly startY: number,
+    public readonly startR: number,
+    private readonly triggers: Trigger[],
+    private readonly roomService: RoomService = Container.get(RoomService)
   ) {
     super()
   }
@@ -34,6 +42,7 @@ export class Room extends EventEmitter implements IRoom {
    * @public
    */
   public add (player: IEntityPlayer, x: number = 0, y: number = 0, r: number = 0): void {
+    console.log(x, y, r)
     if (player.room === this) return
     if (player.room) player.room.remove(player)
 
@@ -69,6 +78,52 @@ export class Room extends EventEmitter implements IRoom {
     }
 
     this.broadcast(LeaveEvent, event)
+  }
+
+  /**
+   * Checks for room triggers.
+   *
+   * @param player
+   * @public
+   */
+  public trigger (player: IEntityPlayer): void {
+    for (const trigger of this.triggers) {
+      const leftOk = player.x > trigger.triggerX - trigger.radius / 2
+      const rightOk = player.x < trigger.triggerX + trigger.radius / 2
+      const topOk = player.y > trigger.triggerY - trigger.radius / 2
+      const bottomOk = player.y < trigger.triggerY + trigger.radius / 2
+
+      const triggered = leftOk && rightOk && topOk && bottomOk
+
+      if (triggered) {
+        this.handleRoomTrigger(player, trigger)
+        break
+      }
+    }
+  }
+
+  /**
+   * Handles room trigger.
+   * 
+   * 
+   * @param trigger 
+   * @private
+   */
+  public handleRoomTrigger (player: IEntityPlayer, trigger: Trigger): void {
+    switch (trigger.type) {
+      case TriggerTypes.TELEPORT:
+        const room = this.roomService.rooms.get(trigger.triggered)
+
+        if (room) {
+          room.add(
+            player,
+            room.startX,
+            room.startY,
+            room.startR
+          )
+        }
+        break
+    }
   }
 
   /**

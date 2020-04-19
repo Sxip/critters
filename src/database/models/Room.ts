@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryColumn } from 'typeorm'
+import { BaseEntity, Column, Entity, OneToMany, PrimaryColumn } from 'typeorm'
+import { Trigger } from './Trigger'
 
 @Entity('rooms')
 export class Room extends BaseEntity {
@@ -57,4 +58,14 @@ export class Room extends BaseEntity {
    */
   @Column({ default: 180 })
   public readonly startR!: number
+
+  /**
+   * Room triggers relation.
+   * 
+   * @public
+   */
+  @OneToMany(() => Trigger,
+    trigger => trigger.room
+  )
+  public readonly triggers!: Trigger[]
 }

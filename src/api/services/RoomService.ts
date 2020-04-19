@@ -30,7 +30,15 @@ export class RoomService {
    */
   public async load (): Promise<void> {
     const rooms = await this.roomRepository.findAllRooms()
-    for (const room of rooms) this.rooms.set(room.id, new Room(room.id))
+    for (const room of rooms) {
+      this.rooms.set(room.id, new Room(
+        room.id,
+        room.startX,
+        room.startY,
+        room.startR,
+        room.triggers
+      ))
+    }
   }
 
   /**

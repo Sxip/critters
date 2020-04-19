@@ -134,6 +134,16 @@ export class PlayerController {
   }
 
   /**
+   * Handles room triggers.
+   *
+   * @param socket
+   */
+  @OnMessage('trigger')
+  public trigger (@ConnectedSocket() socket: PlayerSocket) {
+    socket.player.room.trigger(socket.player)
+  }
+
+  /**
    * Handles disconnection of the player.
    *
    * @param socket

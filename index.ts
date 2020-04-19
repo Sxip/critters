@@ -1,11 +1,11 @@
-import 'reflect-metadata'
-
 import { RoomService } from '@/api/services/RoomService'
 import { PluginManager } from '@/core/PluginManager'
 import { config as dotEnvConfig } from 'dotenv'
+import 'reflect-metadata'
 import Container from 'typedi'
-
 import { Server } from './src/index'
+
+
 
 /**
  * Dotenv config
@@ -35,6 +35,6 @@ dotEnvConfig();
     console.info(`WebSocket: http://localhost:${server.app.get('ws')}/socket.io`)
     console.log('----------------------------------------')
   } catch (error) {
-    console.error(`Initializing failed! Reason: ${error.message}`)
+    console.error(`Initializing failed! Reason: ${error.stack}`)
   }
 })()

@@ -11,6 +11,8 @@ export class RoomRepository extends Repository<Room> implements IRoomRepository 
    * @public
    */
   public findAllRooms (): Promise<Room[]> {
-    return this.find()
+    return this.find({
+      relations: ['triggers'],
+    })
   }
 }
