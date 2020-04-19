@@ -103,7 +103,7 @@ export abstract class PlayerBase extends EventEmitter implements IEntityPlayer {
    * 
    * @constructor
    */
-  protected constructor () {
+  public constructor () {
     super()
 
     this.initialize()

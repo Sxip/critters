@@ -67,14 +67,9 @@ export class CreateRooms1587068116213 implements MigrationInterface {
       name: 'rooms_triggers',
       columns: [
         {
-          name: 'id',
-          type: 'bigint',
-          isPrimary: true,
-          isGenerated: true,
-        },
-        {
           name: 'roomId',
           type: 'varchar',
+          isPrimary: true,
           isNullable: false,
         },
         {
@@ -97,15 +92,15 @@ export class CreateRooms1587068116213 implements MigrationInterface {
           isNullable: true,
         },
         {
-          name: 'triggered',
-          type: 'varchar',
-          isNullable: false,
-        },
-        {
           name: 'radius',
           type: 'integer',
           default: 100,
           isNullable: true,
+        },
+        {
+          name: 'action',
+          type: 'varchar',
+          isNullable: false,
         },
         {
           name: 'created_at',

@@ -19,3 +19,5 @@ Critters is a server implementation of [Box Critters](https://boxcritters.com) w
 ### Showcase
 
 ![](https://user-images.githubusercontent.com/38108408/79524763-3fdb4200-8059-11ea-9ddc-bd2b23af3d07.png)
+
+![](https://user-images.githubusercontent.com/38108408/79699319-c88af580-8286-11ea-84da-1f38d66d4ec9.png)

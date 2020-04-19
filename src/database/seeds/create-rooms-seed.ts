@@ -17,6 +17,8 @@ export default class CreateRoomsSeed implements Seeder {
           id: 'village',
           name: 'village',
           width: 2450,
+          startX: 367,
+          startY: 336,
         },
         {
           id: 'forest',

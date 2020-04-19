@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm'
 import { Room } from './Room'
 
 /**
@@ -14,19 +14,11 @@ export enum TriggerTypes {
 @Entity({ name: 'rooms_triggers' })
 export class Trigger {
   /**
-   * Trigger primary key.
-   * 
-   * @public
-   */
-  @PrimaryGeneratedColumn()
-  public readonly id!: number
-
-  /**
    * Room id column.
    * 
    * @public
    */
-  @Column()
+  @PrimaryColumn()
   public readonly roomId!: string
 
   /**
@@ -54,20 +46,20 @@ export class Trigger {
   public readonly triggerY!: number
 
   /**
-   * Triggered column.
-   * 
-   * @public
-   */
-  @Column()
-  public readonly triggered!: string
-
-  /**
    * Radius column.
    * 
    * @public
    */
   @Column()
   public readonly radius!: number
+
+  /**
+   * Triggered column.
+   * 
+   * @public
+   */
+  @Column()
+  public readonly action!: string
 
   /**
    * Room relation.

@@ -58,7 +58,11 @@ export class PluginManager {
 
       // Todo: check the file extensions
       const plugin = await import(`${this.PATH}/${path}`)
-      new plugin.default()
+      const pluginInstance = new plugin.default()
+
+      if (pluginInstance?.initialize && typeof pluginInstance.initialize === 'function') {
+        pluginInstance.initialize()
+      }
     }
   }
 

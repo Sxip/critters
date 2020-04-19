@@ -88,14 +88,14 @@ export class Room extends EventEmitter implements IRoom {
    */
   public trigger (player: IEntityPlayer): void {
     for (const trigger of this.triggers) {
-      const leftOk = player.x > trigger.triggerX - trigger.radius / 2
-      const rightOk = player.x < trigger.triggerX + trigger.radius / 2
-      const topOk = player.y > trigger.triggerY - trigger.radius / 2
-      const bottomOk = player.y < trigger.triggerY + trigger.radius / 2
+      const left = player.x > trigger.triggerX - trigger.radius / 2
+      const right = player.x < trigger.triggerX + trigger.radius / 2
+      const top = player.y > trigger.triggerY - trigger.radius / 2
+      const bottom = player.y < trigger.triggerY + trigger.radius / 2
 
-      const triggered = leftOk && rightOk && topOk && bottomOk
+      const action = left && right && top && bottom
 
-      if (triggered) {
+      if (action) {
         this.handleRoomTrigger(player, trigger)
         break
       }
@@ -112,7 +112,7 @@ export class Room extends EventEmitter implements IRoom {
   public handleRoomTrigger (player: IEntityPlayer, trigger: Trigger): void {
     switch (trigger.type) {
       case TriggerTypes.TELEPORT:
-        const room = this.roomService.rooms.get(trigger.triggered)
+        const room = this.roomService.rooms.get(trigger.action)
 
         if (room) {
           room.add(

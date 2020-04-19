@@ -18,6 +18,13 @@ export interface IBotOptions {
 
 export class Bot extends PlayerBase {
   /**
+   * Player Nickname color.
+   * 
+   * @public
+   */
+  public readonly nicknameColor = 'orange'
+
+  /**
    * Chat event.
    * 
    * @private
@@ -39,6 +46,14 @@ export class Bot extends PlayerBase {
   private readonly defaultY!: number
 
   /**
+   * Player equipment.
+   * 
+   * @public
+   */
+  public readonly body = 'monk'
+  public readonly head = 'pot'
+
+  /**
    * Constructor.
    * 
    * @param param0 
@@ -55,11 +70,6 @@ export class Bot extends PlayerBase {
 
     this.id = id
     this.nickname = nickname
-
-    this.nicknameColor = 'orange'
-
-    this.body = 'monk'
-    this.head = 'pot'
 
     this.defaultX = defaultX
     this.defaultY = defaultY
