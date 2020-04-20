@@ -129,7 +129,7 @@ export class CreateUsers1587068168844 implements MigrationInterface {
         {
           name: 'userId',
           type: 'bigint',
-          isUnique: true,
+          isUnique: false,
           isNullable: false,
         },
         {

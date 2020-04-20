@@ -18,7 +18,19 @@ export class CreateItems1587068082602 implements MigrationInterface {
         {
           name: 'slot',
           type: 'enum',
-          enum: ['head', 'body', 'ears', 'mask', 'cape'],
+          enum: [
+            'head',
+            'neck',
+            'body',
+            'eyes',
+            'ears',
+            'mask',
+            'hand',
+            'cape',
+            'pack',
+            'belt',
+            'ride',
+          ],
           isNullable: false,
         },
         {

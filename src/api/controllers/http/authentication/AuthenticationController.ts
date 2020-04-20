@@ -18,6 +18,7 @@ export class AuthenticationController {
   /**
    * Authenticates a user.
    *
+   * @method POST
    * @public
    */
   @Post('/login')
@@ -28,6 +29,7 @@ export class AuthenticationController {
   /**
    * Registers a user.
    * 
+   * @method POST
    * @public
    */
   @Post('/register')

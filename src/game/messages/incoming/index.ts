@@ -9,5 +9,7 @@ export enum IncomingMessagesTypes {
   SEND_MESSAGE = 'sendMessage',
   CHAT = 'sendMessage',
   CLICK = 'click',
+  UPDATE_GEAR = 'updateGear',
+  TRIGGER = 'trigger',
   CODE = 'code'
 }

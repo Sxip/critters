@@ -3,6 +3,7 @@ import { Player } from '@/game/entities/player'
 import { IncomingMessagesTypes } from '@/game/messages/incoming'
 import { IncomingChatMessage } from '@/game/messages/incoming/chat'
 import { IncomingCodeMessage } from '@/game/messages/incoming/code'
+import { IncomingUpdateGearMessage } from '@/game/messages/incoming/gear'
 import { IncomingLoginMessage } from '@/game/messages/incoming/login'
 import { IncomingMovementMessage } from '@/game/messages/incoming/move'
 import { IncomingJoinMessage } from '@/game/messages/incoming/room/IncomingJoinMessage'
@@ -59,7 +60,7 @@ export class PlayerController {
     PluginManager.handleIncomingMessage(IncomingMessagesTypes.LOGIN, message, socket.player)
 
     try {
-      const user = await this.userRepository.findByTicket(message.username, message.ticket)
+      const user = await this.userRepository.findByTicket(message.nickname, message.ticket)
       this.logger.info(`Successfully authenticated ticket ${message.ticket} for user ${user.nickname}`)
 
       socket.player.model(user).login()
@@ -138,9 +139,20 @@ export class PlayerController {
    *
    * @param socket
    */
-  @OnMessage('trigger')
+  @OnMessage(IncomingMessagesTypes.TRIGGER)
   public trigger (@ConnectedSocket() socket: PlayerSocket) {
     socket.player.room.trigger(socket.player)
+  }
+
+  /**
+   * Handles gear update.
+   *
+   * @param socket
+   * @param gear
+   */
+  @OnMessage(IncomingMessagesTypes.UPDATE_GEAR)
+  public update (@ConnectedSocket() socket: PlayerSocket, @MessageBody() gear: IncomingUpdateGearMessage): void {
+    socket.player.updateGear(gear)
   }
 
   /**

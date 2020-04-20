@@ -37,6 +37,12 @@ export class UserRepository extends Repository<User> implements IUserRepository 
         'inventory',
         'inventory.item',
         'head',
+        'eyes',
+        'ears',
+        'mask',
+        'body',
+        'pack',
+        'hand',
       ],
     })
   }

@@ -1,5 +1,5 @@
 import { compare } from 'bcrypt'
-import { BaseEntity, Column, Entity, Generated, OneToMany, OneToOne, PrimaryGeneratedColumn, JoinColumn } from 'typeorm'
+import { BaseEntity, Column, Entity, Generated, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { v4 } from 'uuid'
 import { UserItem } from './Useritem'
 
@@ -77,7 +77,7 @@ export class User extends BaseEntity {
     item => item.id
   )
   @JoinColumn({ name: 'head' })
-  public readonly head?: UserItem
+  public head?: UserItem
 
   /**
    * Eyes column relation.
@@ -86,7 +86,7 @@ export class User extends BaseEntity {
     item => item.id
   )
   @JoinColumn({ name: 'eyes' })
-  public readonly eyes?: UserItem
+  public eyes?: UserItem
 
   /**
    * Ears column relation.
@@ -95,7 +95,7 @@ export class User extends BaseEntity {
     item => item.id
   )
   @JoinColumn({ name: 'ears' })
-  public readonly ears?: UserItem
+  public ears?: UserItem
 
   /**
    * Mask column relation.
@@ -104,7 +104,7 @@ export class User extends BaseEntity {
     item => item.id
   )
   @JoinColumn({ name: 'mask' })
-  public readonly mask?: UserItem
+  public mask?: UserItem
 
   /**
    * Body column relation.
@@ -113,7 +113,7 @@ export class User extends BaseEntity {
     item => item.id
   )
   @JoinColumn({ name: 'body' })
-  public readonly body?: UserItem
+  public body?: UserItem
 
   /**
    * Pack column relation.
@@ -122,7 +122,7 @@ export class User extends BaseEntity {
     item => item.id
   )
   @JoinColumn({ name: 'pack' })
-  public readonly pack?: UserItem
+  public pack?: UserItem
 
   /**
    * Hand column relation.
@@ -131,7 +131,7 @@ export class User extends BaseEntity {
     item => item.id
   )
   @JoinColumn({ name: 'hand' })
-  public readonly hand?: UserItem
+  public hand?: UserItem
 
   /**
    * Inventory relation.

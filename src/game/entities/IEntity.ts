@@ -7,11 +7,11 @@ import { IRoom } from '../rooms/IRoom'
  * @interface
  */
 export interface IPlayerGear {
-  cape?: string
-  mask?: string
-  ears?: string
-  body?: string
-  head?: string
+  cape?: string | null
+  mask?: string | null
+  ears?: string | null
+  body?: string | null
+  head?: string | null
 }
 
 /**

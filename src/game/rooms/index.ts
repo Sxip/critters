@@ -42,7 +42,6 @@ export class Room extends EventEmitter implements IRoom {
    * @public
    */
   public add (player: IEntityPlayer, x: number = 0, y: number = 0, r: number = 0): void {
-    console.log(x, y, r)
     if (player.room === this) return
     if (player.room) player.room.remove(player)
 

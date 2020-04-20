@@ -5,15 +5,15 @@
     "routePrefix": "api",
     "validation": true,
     "classTransformer": true,
-    "defaultErrorHandler": false
+    "defaultErrorHandler": true
   },
   "ws": {
     "port": 8080
   },
   "database": {
     "host": "127.0.0.1",
-    "database": "",
-    "username": "",
-    "password": ""
+    "database": "critters",
+    "username": "postgres",
+    "password": "dev"
   }
 }

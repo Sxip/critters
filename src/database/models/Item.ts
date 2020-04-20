@@ -7,10 +7,16 @@ import { Column, Entity, PrimaryColumn } from 'typeorm'
  */
 export enum ItemSlotType {
   HEAD = 'head',
+  NECK = 'neck',
   BODY = 'body',
+  EYES = 'eyes',
   EARS = 'ears',
   MASK = 'mask',
-  cape = 'cape'
+  HAND = 'hand',
+  CAPE = 'cape',
+  PACK = 'pack',
+  BELT = 'belt',
+  RIDE = 'ride'
 }
 
 @Entity('items')

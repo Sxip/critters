@@ -1,5 +1,5 @@
-import { IInventory } from './IInventory'
 import { IItem } from '@/game/items/IItem'
+import { IInventory } from './IInventory'
 
 export class Inventory implements IInventory {
   /**
@@ -36,5 +36,18 @@ export class Inventory implements IInventory {
    */
   public remove (item: IItem): void {
     this.items.add(item)
+  }
+
+  /**
+   * Validates the gear update.
+   * 
+   * 
+   * @param slot 
+   * @param id 
+   * @public
+   */
+  public validateGearUpdate (slot: string, id?: string): IItem | undefined {
+    for (const item of this.getInventory()) if (item.slot === slot && item.itemId === id) return item
+    return undefined
   }
 }

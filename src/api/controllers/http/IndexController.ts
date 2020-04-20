@@ -5,6 +5,7 @@ export class IndexController {
   /**
    * Displays the API message.
    * 
+   * @method GET
    * @public
    */
   @Get()

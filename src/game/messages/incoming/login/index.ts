@@ -2,11 +2,11 @@ import { ILoginMessage } from './ILoginMessage'
 
 export class IncomingLoginMessage implements ILoginMessage {
   /**
-   * Player username.
+   * Player nickname.
    * 
    * @public
    */
-  public readonly username!: string
+  public readonly nickname!: string
 
   /**
    * Player ticket.
