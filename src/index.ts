@@ -127,11 +127,7 @@ export class Server {
    * @private
    */
   private async connection (): Promise<void> {
-    try {
-      await database()
-    } catch (error) {
-      console.error('Database connection failed!')
-    }
+    await database()
   }
 
   /**
