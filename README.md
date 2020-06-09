@@ -34,7 +34,18 @@ Critters is a server implementation of [Box Critters](https://boxcritters.com) w
 ### Steps
 
 1. Clone the Github repository: https://github.com/crittersbox/critters
-2. Install dependencies by navigating to the project in your Terminal or command prompt and running the command `npm install`
+2. Install dependencies by navigating to the project in your Terminal or command prompt and running the command `yarn install`
 3. Go into your `config.development.json` file and configure your database connection settings.
-4. Setup the migrations by navigating to the project in your Terminal or command prompt and running the command `npm run migration:run`
-5. Setup the seeds by running the command `npm run seed`
+4. Setup the migrations by running the command `yarn migration:run`
+5. Setup the seeds by running the command `yarn seed`
+
+If you have followed the steps correctlty, you will now be able to begin serving for connections by typing the command `serve:dev`.
+
+## Rest API
+
+Critters comes with a built-in REST API service for web applications.
+
+### API Endpoints
+
+- `POST /login` : Authenticates a user account
+- `POST /register` : Creates a new user account
