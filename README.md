@@ -35,9 +35,9 @@ Critters is a server implementation of [Box Critters](https://boxcritters.com) w
 ### Steps
 
 1. Clone the Github repository: https://github.com/crittersbox/critters
-2. Unzip the client files inside the `public` directory.
+2. Unzip the client files inside the `public` directory
 3. Install dependencies by navigating to the project in your Terminal or command prompt and running the command `yarn install`
-4. Go into your `config.development.json` file and configure your database connection settings.
+4. Go into your `config.development.json` file and configure your database connection settings
 5. Setup the migrations by running the command `yarn migration:run`
 6. Setup the seeds by running the command `yarn seed`
 
