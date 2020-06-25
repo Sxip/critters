@@ -2,5 +2,4 @@
 node_modules/
 build/
 config/Config.d.ts
-public/*
 .env
