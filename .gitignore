@@ -3,5 +3,4 @@ node_modules/
 build/
 config/Config.d.ts
 public/*
-!public/.gitkeep 
 .env
