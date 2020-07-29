@@ -1,5 +1,4 @@
 import { ILoginMessage } from './ILoginMessage'
-import { IItem } from '@/game/items/IItem'
 
 export class OutgoingLoginMessage implements ILoginMessage {
   /**
@@ -35,7 +34,7 @@ export class OutgoingLoginMessage implements ILoginMessage {
    * 
    * @public
    */
-  public readonly inventory: IItem[]
+  public readonly inventory: string[]
 
   /**
    * Player gear.

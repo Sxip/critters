@@ -5,13 +5,11 @@ import { IJoinEvent, JoinEvent } from '@/game/events/JoinEvent'
 import { ILeaveEvent, LeaveEvent } from '@/game/events/LeaveEvent'
 import { IMoveEvent, MoveEvent } from '@/game/events/MoveEvent'
 import { IUpdateGearEvent, UpdateGearEvent } from '@/game/events/UpdateGearEvent'
-import { IItem } from '@/game/items/IItem'
 import { IncomingUpdateGearMessage } from '@/game/messages/incoming/gear'
 import { OutgoingChatMessage } from '@/game/messages/outgoing/chat'
 import { OutgoingGearMessage } from '@/game/messages/outgoing/gear'
 import { OutgoingLoginMessage } from '@/game/messages/outgoing/login'
 import { OutgoingMovementMessage } from '@/game/messages/outgoing/move'
-import { OutgoingPlayerDataMessage } from '@/game/messages/outgoing/playerData'
 import { OutgoingPlayerJoinMessage } from '@/game/messages/outgoing/playerJoin/OutgoingPlayerJoinMessage'
 import { OutgoingPlayerLeaveMessage } from '@/game/messages/outgoing/playerLeave/OutgoingPlayerJoinMessage'
 import { OutgoingJoinMessage } from '@/game/messages/outgoing/room/OutgoingJoinMessage'
@@ -100,7 +98,7 @@ export class Player extends PlayerBase {
       playerId: this.id.toString(),
       nickname: this.nickname,
       critterId: this.c,
-      inventory: this.inventory.getInventory(),
+      inventory: this.inventory.getInventoryItems(),
       nicknameColor: this.nicknameColor,
       gear: this.getGear(),
       coins: this.coins,
@@ -120,13 +118,13 @@ export class Player extends PlayerBase {
         event.player.getCrumbs()
       ))
     } else {
-      const PlayerCrumbs: IPlayerCrumbs[] = []
+      const playerCrumbs: IPlayerCrumbs[] = []
 
-      for (const player of event.room.players) PlayerCrumbs.push(player.getCrumbs())
+      for (const player of event.room.players) playerCrumbs.push(player.getCrumbs())
 
       this.sendToSocket('joinRoom', new OutgoingJoinMessage({
-        RoomId: event.room.id,
-        PlayerCrumbs,
+        roomId: event.room.id,
+        playerCrumbs,
       }))
     }
   }
@@ -180,9 +178,7 @@ export class Player extends PlayerBase {
    */
   private onUpdateGear (event: IUpdateGearEvent): void {
     if (event.sender === this) {
-      this.sendToSocket('playerData', new OutgoingPlayerDataMessage({
-        gear: event.sender.getGear(),
-      }))
+      this.sendToSocket('updateGear', event.sender.getGear())
     }
 
     this.socket.emit('G', new OutgoingGearMessage({
@@ -198,52 +194,48 @@ export class Player extends PlayerBase {
    * @public
    */
   public async updateGear (update: IncomingUpdateGearMessage): Promise<void> {
+    const userGear: IPlayerGear = {}
+    const userGearAny = userGear as any
+    const thisAny = this as any
+
     const event: IUpdateGearEvent = {
       sender: this,
+      g: [],
     }
 
-    let temp: IItem | undefined
-    const userGear: IPlayerGear = {}
+    console.log('update-gear', update)
 
-    // Body
-    if (update.body && (temp = this.inventory.validateGearUpdate('body', update.body))) {
-      event.body = temp.itemId
-      this.body = temp.itemId
-      userGear.body = temp.uid
-    } else {
-      userGear.body = null
-      this.body = undefined
+    for (const itemId of update) {
+      const item = this.inventory.validateGearUpdate(itemId)
+
+      if (!item) continue
+
+      userGearAny[item.slot] = item.uid
+      thisAny[item.slot] = item.itemId
+      event.g.push(item.itemId)
     }
 
-    // Head
-    if (update.head && (temp = this.inventory.validateGearUpdate('head', update.head))) {
-      event.head = temp.itemId
-      this.head = temp.itemId
-      userGear.head = temp.uid
-    } else {
-      userGear.head = null
-      this.head = undefined
+    if (!userGear.mask) {
+      userGear.mask = null
+      this.mask = undefined
     }
 
-    // Ears
-    if (update.ears && (temp = this.inventory.validateGearUpdate('ears', update.ears))) {
-      event.ears = temp.itemId
-      this.ears = temp.itemId
-      userGear.ears = temp.uid
-    } else {
+    if (!userGear.ears) {
       userGear.ears = null
       this.ears = undefined
     }
 
-    // Mask
-    if (update.mask && (temp = this.inventory.validateGearUpdate('mask', update.mask))) {
-      event.mask = temp.itemId
-      this.mask = temp.itemId
-      userGear.mask = temp.uid
-    } else {
-      userGear.mask = null
-      this.mask = undefined
+    if (!userGear.body) {
+      userGear.body = null
+      this.body = undefined
     }
+
+    if (!userGear.head) {
+      userGear.head = null
+      this.head = undefined
+    }
+
+    console.log('Update gear', userGear)
 
     await this.userService.updateGear(this.id, userGear)
     this.room.broadcast(UpdateGearEvent, event)

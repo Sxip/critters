@@ -70,6 +70,18 @@ export class PlayerController {
   }
 
   /**
+   * Handles room lobby joining.
+   * 
+   * @param socket 
+   * @public
+   */
+  @OnMessage(IncomingMessagesTypes.JOIN_LOBBY)
+  public lobby (@ConnectedSocket() socket: PlayerSocket): void {
+    const room = this.roomService.find('tavern')
+    if (room) room.add(socket.player, 0, 0, 0)
+  }
+
+  /**
   * Handles room joining.
   *
   * @param socket
@@ -107,11 +119,11 @@ export class PlayerController {
    * @param socket
    * @param movement
    */
-  @OnMessage(IncomingMessagesTypes.CLICK)
+  @OnMessage(IncomingMessagesTypes.MOVE_TO)
   public click (@ConnectedSocket() socket: PlayerSocket, @MessageBody() message: IncomingMovementMessage): void {
     this.logger.info(`Movement request from ${socket.player.nickname} ${JSON.stringify(message)}`)
 
-    PluginManager.handleIncomingMessage(IncomingMessagesTypes.CLICK, message, socket.player)
+    PluginManager.handleIncomingMessage(IncomingMessagesTypes.MOVE_TO, message, socket.player)
 
     socket.player.move(message.x, message.y, message.r)
   }

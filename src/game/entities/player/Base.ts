@@ -2,7 +2,7 @@ import { ChatEvent, IChatEvent } from '@/game/events/ChatEvent'
 import { IMoveEvent, MoveEvent } from '@/game/events/MoveEvent'
 import { IRoom } from '@/game/rooms/IRoom'
 import { EventEmitter } from 'events'
-import { IPlayerCrumbs, IPlayerGear } from '../IEntity'
+import { IPlayerCrumbs } from '../IEntity'
 import { IEntityPlayer } from '../IEntityPlayer'
 import { IInventory } from './inventory/IInventory'
 import { Inventory } from './inventory/Inventory'
@@ -114,14 +114,16 @@ export abstract class PlayerBase extends EventEmitter implements IEntityPlayer {
    *
    * @public
    */
-  public getGear (): IPlayerGear {
-    return {
-      cape: this.cape,
-      mask: this.mask,
-      ears: this.ears,
-      body: this.body,
-      head: this.head,
-    }
+  public getGear (): string[] {
+    const gear: string[] = []
+
+    if (this.cape) gear.push(this.cape)
+    if (this.mask) gear.push(this.mask)
+    if (this.ears) gear.push(this.ears)
+    if (this.body) gear.push(this.body)
+    if (this.head) gear.push(this.head)
+
+    return gear
   }
 
   /**

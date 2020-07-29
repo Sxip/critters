@@ -1,4 +1,3 @@
-import { IPlayerGear } from '@/game/entities/IEntity'
 import { IPlayerJoinMessage } from './IPlayerJoinMessage'
 
 export class OutgoingPlayerJoinMessage implements IPlayerJoinMessage {
@@ -19,7 +18,7 @@ export class OutgoingPlayerJoinMessage implements IPlayerJoinMessage {
    * 
    * @public
    */
-  public g: IPlayerGear
+  public g: string[]
 
   /**
    * Player nickname color.
