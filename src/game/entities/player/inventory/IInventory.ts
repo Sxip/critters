@@ -6,5 +6,6 @@ export interface IInventory {
   add(item: IItem): void
   remove(item: IItem): void
   getInventory(): IItem[]
-  validateGearUpdate(slot: string, id?: string): IItem | undefined
+  getInventoryItems(): string[]
+  validateGearUpdate(id: string): IItem | undefined
 }

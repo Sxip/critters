@@ -106,6 +106,24 @@ export default class CreateItemsSeed implements Seeder {
           cost: 100,
         },
         {
+          id: 'pirate_hat_hook',
+          theme: 'pirate',
+          slot: ItemSlotType.HEAD,
+          cost: 100,
+        },
+        {
+          id: 'wooden_barrel',
+          theme: 'pirate',
+          slot: ItemSlotType.BODY,
+          cost: 100,
+        },
+        {
+          id: 'swimsuit_green',
+          theme: 'summer',
+          slot: ItemSlotType.BODY,
+          cost: 100,
+        },
+        {
           id: 'headband_blue',
           theme: 'sports',
           slot: ItemSlotType.HEAD,
@@ -128,6 +146,12 @@ export default class CreateItemsSeed implements Seeder {
           theme: 'event',
           slot: ItemSlotType.HEAD,
           cost: 100,
+        },
+        {
+          id: 'water_wings_blue',
+          theme: 'sports',
+          slot: ItemSlotType.HAND,
+          cost: 20,
         },
         {
           id: 'bb_backpack',

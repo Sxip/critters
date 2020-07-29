@@ -29,6 +29,21 @@ export class Inventory implements IInventory {
   }
 
   /**
+   * Returns the inventory items string[].
+   * 
+   * @public
+   */
+  public getInventoryItems (): string[] {
+    const items: string[] = []
+
+    for (const item of this.items) {
+      items.push(item.itemId)
+    }
+
+    return items
+  }
+
+  /**
    * Removes a item from the inventory set.
    * 
    * @param item 
@@ -46,8 +61,8 @@ export class Inventory implements IInventory {
    * @param id 
    * @public
    */
-  public validateGearUpdate (slot: string, id?: string): IItem | undefined {
-    for (const item of this.getInventory()) if (item.slot === slot && item.itemId === id) return item
+  public validateGearUpdate (id: string): IItem | undefined {
+    for (const item of this.getInventory()) if (item.itemId === id) return item
     return undefined
   }
 }

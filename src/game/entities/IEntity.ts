@@ -15,12 +15,25 @@ export interface IPlayerGear {
 }
 
 /**
+ * Player gear container.
+ * 
+ * @class
+ */
+export class PlayerGearContainer implements IPlayerGear {
+  public cape: string | null = null
+  public mask: string | null = null
+  public ears: string | null = null
+  public body: string | null = null
+  public head: string | null = null
+}
+
+/**
  * Player crumps interface.
  * 
  * @interface
  */
 export interface IPlayerCrumbs {
-  g: IPlayerGear
+  g: string[]
   i: string
   n: string
   nicknameColor: string
@@ -45,6 +58,6 @@ export default interface IEntity extends EventEmitter {
   c: string
   room: IRoom
 
-  getGear(): IPlayerGear
+  getGear(): string[]
   getCrumbs(): IPlayerCrumbs
 }

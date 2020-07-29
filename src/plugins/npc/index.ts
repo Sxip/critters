@@ -23,7 +23,7 @@ export default class NpcMike {
    * @public
    */
   public initialize (): void {
-    const room = this.roomsService.find('village')
+    const room = this.roomsService.find('port')
     if (room) room.add(new Mike(), 880, 203, 180)
   }
 }

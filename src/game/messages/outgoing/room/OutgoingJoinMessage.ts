@@ -7,14 +7,14 @@ export class OutgoingJoinMessage implements IRoomJoinMessage {
    * 
    * @public
    */
-  public RoomId: string
+  public roomId: string
 
   /**
    * Player crumbs.
    * 
    * @public
    */
-  public PlayerCrumbs: IPlayerCrumbs[]
+  public playerCrumbs: IPlayerCrumbs[]
 
   /**
    * Constructor.
@@ -22,7 +22,7 @@ export class OutgoingJoinMessage implements IRoomJoinMessage {
    * @public
    */
   public constructor (data: IRoomJoinMessage) {
-    this.RoomId = data.RoomId
-    this.PlayerCrumbs = data.PlayerCrumbs
+    this.roomId = data.roomId
+    this.playerCrumbs = data.playerCrumbs
   }
 }
