@@ -20,9 +20,6 @@ Critters is a server implementation of [Box Critters](https://boxcritters.com) w
 
 ![](https://user-images.githubusercontent.com/38108408/88861470-ef49b800-d1f5-11ea-8f19-c7bce049d604.png)
 
-![](https://i.imgur.com/8klFVDH.gif)
-
-
 ## Getting Started
 
 **Note** Make sure you have the following installed and setup.
