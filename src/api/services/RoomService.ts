@@ -36,7 +36,7 @@ export class RoomService {
         room.startX,
         room.startY,
         room.startR,
-        room.triggers
+        room.triggers,
       ))
     }
   }

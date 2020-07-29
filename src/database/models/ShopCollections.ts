@@ -1,4 +1,4 @@
-import { BaseEntity, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { BaseEntity, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { Item } from './Item'
 import { Shop } from './Shop'
 
@@ -20,6 +20,7 @@ export default class ShopCollections extends BaseEntity {
   @OneToOne(() => Item,
     item => item.id
   )
+  @JoinColumn({ name: 'item' })
   public readonly item!: Item
 
   /**
@@ -30,5 +31,6 @@ export default class ShopCollections extends BaseEntity {
   @OneToOne(() => Shop,
     shop => shop.id
   )
+  @JoinColumn({ name: 'shop' })
   public readonly shop!: number
 }

@@ -14,6 +14,12 @@ export default class CreateRoomsSeed implements Seeder {
           name: 'Tavern',
         },
         {
+          id: 'port',
+          name: 'Port',
+          width: 2400,
+          height: 480,
+        },
+        {
           id: 'village',
           name: 'village',
           width: 2450,

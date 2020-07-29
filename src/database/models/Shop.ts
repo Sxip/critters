@@ -58,8 +58,8 @@ export class Shop extends BaseEntity {
    * 
    * @public
    */
-  @OneToMany(() => Item,
-    item => item.id
+  @OneToMany(() => ShopCollections,
+    collection => collection.shop
   )
   public readonly collections!: ShopCollections[]
 }

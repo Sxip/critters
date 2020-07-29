@@ -1,4 +1,3 @@
-import ShopCollections from '@/database/models/ShopCollections'
 import { IShopMessage } from './IShopMessage'
 
 export class OutgoingShopMessage implements IShopMessage {
@@ -7,7 +6,7 @@ export class OutgoingShopMessage implements IShopMessage {
    * 
    * @public
    */
-  public readonly collection!: ShopCollections[]
+  public readonly collection!: string[]
 
   /**
    * Shop shop item.

@@ -81,8 +81,8 @@ export class PlayerController {
    */
   @OnMessage(IncomingMessagesTypes.JOIN_LOBBY)
   public lobby (@ConnectedSocket() socket: PlayerSocket): void {
-    const room = this.roomService.find('tavern')
-    if (room) room.add(socket.player, 0, 0, 0)
+    const room = this.roomService.find('port')
+    if (room) room.add(socket.player, room.startX, room.startX)
   }
 
   /**
@@ -99,7 +99,7 @@ export class PlayerController {
     PluginManager.handleIncomingMessage(IncomingMessagesTypes.JOIN_ROOM, message, socket.player)
 
     const room = this.roomService.find(message.roomId)
-    if (room) room.add(socket.player, 0, 0, 0)
+    if (room) room.add(socket.player, room.startX, room.startY, 0)
   }
 
   /**
@@ -148,10 +148,10 @@ export class PlayerController {
     const shop = await this.shopService.find(id)
     if (shop) {
       socket.player.sendToSocket('getShop', new OutgoingShopMessage({
-        collection: shop.collections || [],
-        freeItem: shop.free?.id,
-        nextItem: shop.next?.id,
-        lastItem: shop.last?.id,
+        collection: shop.collections.map(c => c.item.id) || [],
+        freeItem: shop.free.id,
+        nextItem: shop.next.id,
+        lastItem: shop.last.id,
       }))
     }
   }

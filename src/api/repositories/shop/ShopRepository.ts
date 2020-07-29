@@ -15,6 +15,8 @@ export class ShopRepository extends Repository<Shop> implements IShopRepository 
       where: { id },
       cache: true,
       relations: [
+        'collections',
+        'collections.item',
         'free',
         'next',
         'last',
