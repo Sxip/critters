@@ -1,8 +1,9 @@
-import { Entity, OneToOne, PrimaryColumn } from 'typeorm'
+import { BaseEntity, Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryColumn } from 'typeorm'
 import { Item } from './Item'
+import ShopCollections from './ShopCollections'
 
 @Entity('shops')
-export default class Shop {
+export class Shop extends BaseEntity {
   /**
    * Shop primary key.
    *
@@ -12,26 +13,53 @@ export default class Shop {
   public readonly id!: string
 
   /**
-   * Free item column relation.
+   * Shop primary key.
+   *
+   * @public
    */
-  @OneToOne(() => Item,
-    item => item.id
-  )
-  public freeItem?: Item
+  @Column()
+  public readonly name!: string
 
   /**
    * Free item column relation.
+   * 
+   * @public
    */
   @OneToOne(() => Item,
     item => item.id
   )
-  public lastItem?: Item
+  @JoinColumn({ name: 'free' })
+  public readonly free!: Item
 
   /**
    * Free item column relation.
+   * 
+   * @public
    */
   @OneToOne(() => Item,
     item => item.id
   )
-  public nextItem?: Item
+  @JoinColumn({ name: 'next' })
+  public readonly next!: Item
+
+  /**
+   * Free item column relation.
+   * 
+   * @public
+   */
+  @OneToOne(() => Item,
+    item => item.id
+  )
+  @JoinColumn({ name: 'last' })
+  public readonly last!: Item
+
+  /**
+   * Shop collections relation.
+   * 
+   * @public
+   */
+  @OneToMany(() => Item,
+    item => item.id
+  )
+  public readonly collections!: ShopCollections[]
 }

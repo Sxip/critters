@@ -1,3 +1,4 @@
+import { ShopService } from '@/api/services/ShopService'
 import { PluginManager } from '@/core/PluginManager'
 import { Player } from '@/game/entities/player'
 import { IncomingMessagesTypes } from '@/game/messages/incoming'
@@ -7,6 +8,8 @@ import { IncomingUpdateGearMessage } from '@/game/messages/incoming/gear'
 import { IncomingLoginMessage } from '@/game/messages/incoming/login'
 import { IncomingMovementMessage } from '@/game/messages/incoming/move'
 import { IncomingJoinMessage } from '@/game/messages/incoming/room/IncomingJoinMessage'
+import { IncomingShopMessage } from '@/game/messages/incoming/shop'
+import { OutgoingShopMessage } from '@/game/messages/outgoing/shop'
 import { PlayerSocket } from '@/types/PlayerSocket'
 import { UserRepository } from '@repositories/user/UserRepository'
 import { RoomService } from '@services/RoomService'
@@ -30,7 +33,8 @@ export class PlayerController {
    */
   public constructor (
     @InjectRepository() private readonly userRepository: UserRepository,
-    private readonly roomService: RoomService
+    private readonly roomService: RoomService,
+    private readonly shopService: ShopService
   ) { }
 
   /**
@@ -85,6 +89,7 @@ export class PlayerController {
   * Handles room joining.
   *
   * @param socket
+  * @param message
   * @public
   */
   @OnMessage(IncomingMessagesTypes.JOIN_ROOM)
@@ -101,7 +106,7 @@ export class PlayerController {
    * Handles player messages.
    *
    * @param socket
-   * @param movement
+   * @param message
    * @public
    */
   @OnMessage(IncomingMessagesTypes.CHAT)
@@ -126,6 +131,29 @@ export class PlayerController {
     PluginManager.handleIncomingMessage(IncomingMessagesTypes.MOVE_TO, message, socket.player)
 
     socket.player.move(message.x, message.y, message.r)
+  }
+
+  /**
+   * Handles shop load.
+   *
+   * @param socket
+   * @param message
+   */
+  @OnMessage(IncomingMessagesTypes.SHOP)
+  public async shop (@ConnectedSocket() socket: PlayerSocket, @MessageBody() { id }: IncomingShopMessage): Promise<void> {
+    this.logger.info(`Shop load ${id} request from ${socket.player.nickname}`)
+
+    PluginManager.handleIncomingMessage(IncomingMessagesTypes.SHOP, id, socket.player)
+
+    const shop = await this.shopService.find(id)
+    if (shop) {
+      socket.player.sendToSocket('getShop', new OutgoingShopMessage({
+        collection: shop.collections || [],
+        freeItem: shop.free?.id,
+        nextItem: shop.next?.id,
+        lastItem: shop.last?.id,
+      }))
+    }
   }
 
   /**
