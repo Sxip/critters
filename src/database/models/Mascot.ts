@@ -5,13 +5,13 @@ import { BaseEntity, Column, Entity, PrimaryColumn } from 'typeorm'
  * 
  * @enum
  */
-export enum CritterTypes {
+export enum MascotTypes {
   CRITTER = 'critter',
   MASCOT = 'mascot'
 }
 
-@Entity('critters')
-export class Critter extends BaseEntity {
+@Entity('mascots')
+export class Mascot extends BaseEntity {
   /**
    * Room primary key.
    * 
@@ -33,5 +33,5 @@ export class Critter extends BaseEntity {
    * 
    * @public
    */
-  public readonly type!: CritterTypes
+  public readonly type!: MascotTypes
 }

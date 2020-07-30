@@ -28,19 +28,19 @@ export class CreateRooms1587068116213 implements MigrationInterface {
           isNullable: true,
         },
         {
-          name: 'startX',
+          name: 'start_x',
           type: 'integer',
           default: 440,
           isNullable: true,
         },
         {
-          name: 'startY',
+          name: 'start_y',
           type: 'integer',
           default: 190,
           isNullable: true,
         },
         {
-          name: 'startR',
+          name: 'start_r',
           type: 'integer',
           default: 180,
           isNullable: true,
@@ -67,7 +67,7 @@ export class CreateRooms1587068116213 implements MigrationInterface {
       name: 'rooms_triggers',
       columns: [
         {
-          name: 'roomId',
+          name: 'room_id',
           type: 'varchar',
           isPrimary: true,
           isNullable: false,
@@ -80,13 +80,13 @@ export class CreateRooms1587068116213 implements MigrationInterface {
           isNullable: true,
         },
         {
-          name: 'triggerX',
+          name: 'trigger_x',
           type: 'integer',
           default: 100,
           isNullable: true,
         },
         {
-          name: 'triggerY',
+          name: 'trigger_y',
           type: 'integer',
           default: 100,
           isNullable: true,
@@ -121,7 +121,7 @@ export class CreateRooms1587068116213 implements MigrationInterface {
     * Creates the foreign key for room id.
     */
     await queryRunner.createForeignKey('rooms_triggers', new TableForeignKey({
-      columnNames: ['roomId'],
+      columnNames: ['room_id'],
       referencedColumnNames: ['id'],
       referencedTableName: 'rooms',
     }))

@@ -33,13 +33,13 @@ export class CreateUsers1587068168844 implements MigrationInterface {
           isUnique: true,
         },
         {
-          name: 'nicknameColor',
+          name: 'nickname_color',
           type: 'varchar',
           default: '\'white\'',
           isNullable: true,
         },
         {
-          name: 'critterId',
+          name: 'mascot',
           type: 'varchar',
           default: '\'hamster\'',
           isNullable: true,
@@ -127,13 +127,13 @@ export class CreateUsers1587068168844 implements MigrationInterface {
           generationStrategy: 'increment',
         },
         {
-          name: 'userId',
+          name: 'user_id',
           type: 'bigint',
           isUnique: false,
           isNullable: false,
         },
         {
-          name: 'itemId',
+          name: 'item_id',
           type: 'varchar',
           isNullable: false,
         },
@@ -157,9 +157,9 @@ export class CreateUsers1587068168844 implements MigrationInterface {
      */
     await queryRunner.createForeignKeys('users', [
       new TableForeignKey({
-        columnNames: ['critterId'],
+        columnNames: ['mascot'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'critters',
+        referencedTableName: 'mascots',
       }),
       new TableForeignKey({
         columnNames: ['head'],
@@ -203,12 +203,12 @@ export class CreateUsers1587068168844 implements MigrationInterface {
      */
     await queryRunner.createForeignKeys('users_items', [
       new TableForeignKey({
-        columnNames: ['userId'],
+        columnNames: ['user_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'users',
       }),
       new TableForeignKey({
-        columnNames: ['itemId'],
+        columnNames: ['item_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'items',
       }),

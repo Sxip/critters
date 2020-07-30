@@ -1,38 +1,34 @@
-import { RoomService } from '@/api/services/RoomService'
-import { PluginManager } from '@/core/PluginManager'
-import { config as dotEnvConfig } from 'dotenv'
 import 'reflect-metadata'
+import '@/config/Logger'
+import '@/config/Ioc'
+
+import { RoomService } from '@/api/services/RoomService'
+import { ENV, PORT } from '@/config/Env'
+import { server } from '@/config/Socket.io'
+import { PluginManager } from '@/core/PluginManager'
+import { database } from '@/database'
 import Container from 'typedi'
-import { Server } from './src/index'
-
-
-
-/**
- * Dotenv config
- */
-dotEnvConfig();
 
 /**
  * Initializes the application.
  *
- * @method
+ * @function
  */
 (async () => {
+  console.clear()
+
   try {
-    const server = await Server.bootstrap()
-      .ioc()
-      .ignite()
+    await database()
 
-    // Loads the rooms
     await Container.get(RoomService).load()
-
-    // Loads all of the plugins
     await PluginManager.loadAll()
 
+    server.listen(PORT)
+
     console.log('----------------------------------------')
-    console.info(`Environment: ${server.app.get('env')}`)
-    console.info(`Base URL: http://localhost:${server.app.get('port')}`)
-    console.info(`WebSocket: http://localhost:${server.app.get('ws')}/socket.io`)
+    console.info(`Environment: ${ENV}`)
+    console.info(`Base URL: http://localhost:${PORT}`)
+    console.info(`WebSocket: http://localhost:${PORT}/socket.io`)
     console.log('----------------------------------------')
   } catch (error) {
     console.error(`Initializing failed! Reason: ${error.stack}`)

@@ -82,7 +82,8 @@ export class PlayerController {
   @OnMessage(IncomingMessagesTypes.JOIN_LOBBY)
   public lobby (@ConnectedSocket() socket: PlayerSocket): void {
     const room = this.roomService.find('port')
-    if (room) room.add(socket.player, room.startX, room.startX)
+
+    if (room) room.add(socket.player, room.startX, room.startY)
   }
 
   /**
@@ -181,6 +182,8 @@ export class PlayerController {
    */
   @OnMessage(IncomingMessagesTypes.TRIGGER)
   public trigger (@ConnectedSocket() socket: PlayerSocket) {
+    PluginManager.handleIncomingMessage(IncomingMessagesTypes.TRIGGER, {}, socket.player)
+
     socket.player.room.trigger(socket.player)
   }
 
@@ -192,6 +195,8 @@ export class PlayerController {
    */
   @OnMessage(IncomingMessagesTypes.UPDATE_GEAR)
   public update (@ConnectedSocket() socket: PlayerSocket, @MessageBody() gear: IncomingUpdateGearMessage): void {
+    PluginManager.handleIncomingMessage(IncomingMessagesTypes.UPDATE_GEAR, gear, socket.player)
+
     socket.player.updateGear(gear)
   }
 

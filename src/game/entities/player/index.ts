@@ -57,7 +57,7 @@ export class Player extends PlayerBase {
     this.id = user.id
     this.nickname = user.nickname
     this.nicknameColor = user.nicknameColor
-    this.c = user.critterId
+    this.c = user.mascot
     this.coins = user.coins
     this.gems = user.gems
 
@@ -203,8 +203,6 @@ export class Player extends PlayerBase {
       g: [],
     }
 
-    console.log('update-gear', update)
-
     for (const itemId of update) {
       const item = this.inventory.validateGearUpdate(itemId)
 
@@ -234,8 +232,6 @@ export class Player extends PlayerBase {
       userGear.head = null
       this.head = undefined
     }
-
-    console.log('Update gear', userGear)
 
     await this.userService.updateGear(this.id, userGear)
     this.room.broadcast(UpdateGearEvent, event)

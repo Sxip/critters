@@ -1,23 +1,23 @@
 import { Connection } from 'typeorm'
 import { Factory, Seeder } from 'typeorm-seeding'
-import { Critter, CritterTypes } from '../models/Critter'
+import { Mascot, MascotTypes } from '../models/Mascot'
 
-export default class CreateCrittersSeed implements Seeder {
+export default class CreateMascotsSeed implements Seeder {
   public async run (factory: Factory, connection: Connection): Promise<void> {
     await connection
       .createQueryBuilder()
       .insert()
-      .into(Critter)
+      .into(Mascot)
       .values([
         {
           id: 'hamster',
           name: 'Hamster',
-          type: CritterTypes.CRITTER,
+          type: MascotTypes.CRITTER,
         },
         {
-          id: 'raccoon',
-          name: 'Raccoon',
-          type: CritterTypes.CRITTER,
+          id: 'snail',
+          name: 'Snail',
+          type: MascotTypes.MASCOT,
         },
       ])
       .execute()
