@@ -43,16 +43,16 @@ export class User extends BaseEntity {
    * 
    * @public
    */
-  @Column()
+  @Column({ name: 'nickname_color' })
   public readonly nicknameColor!: string
 
   /**
-   * Critter id column.
+   * Mascot id column.
    * 
    * @public
    */
   @Column()
-  public readonly critterId!: string
+  public readonly mascot!: string
 
   /**
    * Coins column.
@@ -72,6 +72,8 @@ export class User extends BaseEntity {
 
   /**
    * Head column relation.
+   * 
+   * @public
    */
   @OneToOne(() => UserItem,
     item => item.id
@@ -81,6 +83,8 @@ export class User extends BaseEntity {
 
   /**
    * Eyes column relation.
+   * 
+   * @public
    */
   @OneToOne(() => UserItem,
     item => item.id
@@ -90,6 +94,8 @@ export class User extends BaseEntity {
 
   /**
    * Ears column relation.
+   * 
+   * @public
    */
   @OneToOne(() => UserItem,
     item => item.id
@@ -99,6 +105,8 @@ export class User extends BaseEntity {
 
   /**
    * Mask column relation.
+   * 
+   * @public
    */
   @OneToOne(() => UserItem,
     item => item.id
@@ -108,6 +116,8 @@ export class User extends BaseEntity {
 
   /**
    * Body column relation.
+   * 
+   * @public
    */
   @OneToOne(() => UserItem,
     item => item.id
@@ -117,6 +127,8 @@ export class User extends BaseEntity {
 
   /**
    * Pack column relation.
+   * 
+   * @public
    */
   @OneToOne(() => UserItem,
     item => item.id
@@ -126,6 +138,8 @@ export class User extends BaseEntity {
 
   /**
    * Hand column relation.
+   * 
+   * @public
    */
   @OneToOne(() => UserItem,
     item => item.id
@@ -135,6 +149,8 @@ export class User extends BaseEntity {
 
   /**
    * Inventory relation.
+   * 
+   * @public
    */
   @OneToMany(() => UserItem,
     item => item.user

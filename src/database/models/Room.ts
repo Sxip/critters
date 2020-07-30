@@ -40,7 +40,7 @@ export class Room extends BaseEntity {
    * 
    * @public
    */
-  @Column({ default: 440 })
+  @Column({ name: 'start_x', default: 440 })
   public readonly startX!: number
 
   /**
@@ -48,7 +48,7 @@ export class Room extends BaseEntity {
    * 
    * @public
    */
-  @Column({ default: 190 })
+  @Column({ name: 'start_y', default: 190 })
   public readonly startY!: number
 
   /**
@@ -56,7 +56,7 @@ export class Room extends BaseEntity {
    * 
    * @public
    */
-  @Column({ default: 180 })
+  @Column({ name: 'start_r', default: 180 })
   public readonly startR!: number
 
   /**

@@ -18,7 +18,7 @@ export class Trigger {
    * 
    * @public
    */
-  @PrimaryColumn()
+  @PrimaryColumn({ name: 'room_id' })
   public readonly roomId!: string
 
   /**
@@ -34,7 +34,7 @@ export class Trigger {
    * 
    * @public
    */
-  @Column()
+  @Column({ name: 'trigger_x' })
   public readonly triggerX!: number
 
   /**
@@ -42,7 +42,7 @@ export class Trigger {
    * 
    * @public
    */
-  @Column()
+  @Column({ name: 'trigger_y' })
   public readonly triggerY!: number
 
   /**

@@ -1,5 +1,6 @@
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies'
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions'
-import config from './src/config'
+import { DB_DATABASE, DB_HOST, DB_PASSWORD, DB_USERNAME } from './src/config/Env'
 
 /**
  * Connection options interface.
@@ -18,10 +19,10 @@ interface IConnectionOptions extends PostgresConnectionOptions {
  */
 const ormconfig: IConnectionOptions = {
   type: 'postgres',
-  host: config.database.host,
-  username: config.database.username,
-  password: config.database.password,
-  database: config.database.database,
+  host: DB_HOST,
+  username: DB_USERNAME,
+  password: DB_PASSWORD,
+  database: DB_DATABASE,
   logging: false,
   synchronize: false,
   entities: [
@@ -44,6 +45,7 @@ const ormconfig: IConnectionOptions = {
     migrationsDir: 'src/database/migrations',
     subscribersDir: 'src/database/models',
   },
+  namingStrategy: new SnakeNamingStrategy(),
 }
 
 module.exports = ormconfig

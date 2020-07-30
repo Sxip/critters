@@ -18,6 +18,8 @@ export default class CreateRoomsSeed implements Seeder {
           name: 'Port',
           width: 2400,
           height: 480,
+          startX: 1287,
+          startY: 293,
         },
         {
           id: 'village',

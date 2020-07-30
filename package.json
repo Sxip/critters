@@ -19,7 +19,7 @@
     "author": "Sxip",
     "license": "MIT",
     "devDependencies": {
-        "@types/convict": "^4.2.1",
+        "@types/compression": "^1.7.0",
         "@types/dotenv": "^8.2.0",
         "@types/faker": "^4.1.11",
         "@types/jsonwebtoken": "^8.3.8",
@@ -43,7 +43,7 @@
         "body-parser": "^1.19.0",
         "class-transformer": "^0.2.3",
         "class-validator": "^0.11.0",
-        "convict": "^5.2.0",
+        "compression": "^1.7.4",
         "cors": "^2.8.5",
         "cross-env": "^7.0.0",
         "dotenv": "^8.2.0",
@@ -58,6 +58,7 @@
         "socket.io": "^2.3.0",
         "typedi": "^0.8.0",
         "typeorm": "0.2.22",
+        "typeorm-naming-strategies": "^1.1.0",
         "typeorm-seeding": "^1.5.0",
         "uuid": "^7.0.3"
     }

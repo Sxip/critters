@@ -1,9 +1,9 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm'
 
-export class CreateCritters1587068042142 implements MigrationInterface {
+export class CreateMascots1587068042142 implements MigrationInterface {
   public async up (queryRunner: QueryRunner): Promise<void> {
     return queryRunner.createTable(new Table({
-      name: 'critters',
+      name: 'mascots',
       columns: [
         {
           name: 'id',
@@ -39,6 +39,6 @@ export class CreateCritters1587068042142 implements MigrationInterface {
   }
 
   public async down (queryRunner: QueryRunner): Promise<void> {
-    return queryRunner.dropTable('critters')
+    return queryRunner.dropTable('mascots')
   }
 }

@@ -17,7 +17,7 @@ export class UserItem extends BaseEntity {
    * 
    * @public
    */
-  @Column()
+  @Column({ name: 'user_id' })
   public readonly userId!: number
 
   /**
@@ -25,7 +25,7 @@ export class UserItem extends BaseEntity {
    * 
    * @public
    */
-  @Column()
+  @Column({ name: 'item_id' })
   public readonly itemId!: string
 
   /**
@@ -33,8 +33,8 @@ export class UserItem extends BaseEntity {
    *
    * @public
    */
-  @ManyToOne(() => User, user =>
-    user.id
+  @ManyToOne(() => User,
+    user => user.id
   )
   public readonly user!: User
 
