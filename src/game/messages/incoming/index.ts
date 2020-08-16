@@ -13,5 +13,6 @@ export enum IncomingMessagesTypes {
   MOVE_TO = 'moveTo',
   UPDATE_GEAR = 'updateGear',
   TRIGGER = 'trigger',
-  CODE = 'code'
+  CODE = 'code',
+  CUSTOM = 'custom'
 }

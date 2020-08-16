@@ -1,0 +1,24 @@
+extends ../layout/default
+
+block content
+  #login.container.pt-2
+    .row.justify-content-center
+      .col.col-sm-10.col-md-8.col-lg-6
+        form.form.form-login(style='max-width: 330px' novalidate='')
+          div
+            img(src='images/logos/box_critters400.jpg' width='100' height='100')
+          #loginError.alert.alert-danger(style='display: none')
+          .form-group.login-username
+            input#username.form-control(type='text' placeholder='Username' required='' autofocus='' autocomplete='username')
+            .invalid-feedback Invalid email address
+          .form-group
+            input#password.form-control(type='password' placeholder='Password' required='' autocomplete='current-password')
+            .invalid-feedback Password must be between 3 and 100 characters
+          .form-group
+            button#loginButton.btn.btn-lg.btn-primary.btn-block Sign in
+            a.btn.btn-lg.btn-secondary.btn-block(href='join/index.html')
+              | Create
+              | an Account
+              
+  script(src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js')
+  script(src='js/login.js')

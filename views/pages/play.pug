@@ -1,0 +1,38 @@
+extends ../layout/default
+
+block content
+  #world.container.pt-2
+  .row.justify-content-center.m-0
+    .col-lg-10.p-0
+      div(style='position: relative;')
+        canvas#stage(width='855' height='480' style='background-color: #EEEEEE; width: 100%')
+  .row.justify-content-center.m-0
+    .col-lg-6.col-md
+      #chat.mt-2
+        form.form.chat-form(autocomplete='off')
+          .input-group
+            input#message.form-control(type='text' maxlength='60')
+            span.input-group-btn(style='touch-action: none;')
+              button.btn.btn-primary.btn-lg(type='submit') Send
+    .col-md-auto
+      #menu
+        span.input-group-btn(style='touch-action: none;')
+          button.btn.btn-link.p-0(onclick='world.showChat()')
+            img(src='/images/menu/Btn_Menu_Chat_A.png' height='60')
+        span.input-group-btn(style='touch-action: none;')
+          button.btn.btn-link.p-0(onclick='world.showCards()')
+            img(src='/images/menu/Btn_Menu_Cards_A.png' height='60')
+        span.input-group-btn(style='touch-action: none;')
+          button.btn.btn-link.p-0(onclick='world.showInventory()')
+            img(src='/images/menu/Btn_Menu_Items_A.png' height='60')
+        span.input-group-btn(style='touch-action: none;')
+          button.btn.btn-link.p-0(onclick='world.showShop()')
+            img(src='/images/menu/Btn_Menu_Shop_A.png' height='60')
+        span.input-group-btn(style='touch-action: none;')
+          button.btn.btn-link.p-0(onclick='world.showSettings()')
+            img(src='/images/menu/Btn_Menu_Misc_A.png' height='60')
+
+  script(src='//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js')
+  script(src='//code.createjs.com/1.0.0/createjs.min.js')
+  script(src='game/game.js')
+  script(src='js/client.js')

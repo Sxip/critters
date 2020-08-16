@@ -17,6 +17,10 @@ const app: Application = express()
  * Configure express app.
  */
 app
+  .set('view engine', 'pug')
+  .set('views', path.join(__dirname, '..', '..', 'views', 'pages'))
+
+app
   .use(compression())
   .use(json())
   .use(urlencoded({ extended: true }))
@@ -29,7 +33,6 @@ app
  * Set up routing-controllers.
  */
 useExpressServer<Application>(app, {
-  routePrefix: 'api',
   classTransformer: true,
   defaultErrorHandler: true,
   controllers: [path.join(__dirname, '..', 'api', 'controllers', 'http', '/**/*.{ts,js}')],

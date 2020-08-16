@@ -31,7 +31,7 @@ Critters is a server implementation of [Box Critters](https://boxcritters.com) w
 
 ### Steps
 
-1. Clone the Github repository: https://github.com/crittersbox/critters
+1. Clone the Github repository: https://github.com/sxip/critters
 2. Unzip the client files inside the `public` directory
 3. Install dependencies by navigating to the project in your Terminal or command prompt and running the command `yarn install`
 4. Go into your `config.development.json` file and configure your database connection settings
@@ -48,3 +48,4 @@ Critters comes with a built-in REST API service for web applications.
 
 - `POST /login` : Authenticates a user account
 - `POST /register` : Creates a new user account
+- `GET /room/:id` : Returns information about a room
