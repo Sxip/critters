@@ -1,4 +1,4 @@
-import { UserRepository } from '@repositories/user/UserRepository'
+import { UserRepository } from '@/api/repositories/user/UserRepository'
 import { Service } from 'typedi'
 import { InjectRepository } from 'typeorm-typedi-extensions'
 

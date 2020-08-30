@@ -1,9 +1,9 @@
-import { AuthenticationService } from '@services/authentication/AuthenticationService'
-import { LoginValidation } from '@validators/authentication/LoginValidation'
-import { RegisterValidation } from '@validators/authentication/RegisterValidation'
+import { AuthenticationService } from '@/api/services/authentication/AuthenticationService'
+import { LoginValidation } from '@/api/validators/authentication/LoginValidation'
+import { RegisterValidation } from '@/api/validators/authentication/RegisterValidation'
 import { Body, JsonController, Post } from 'routing-controllers'
 
-@JsonController('/auth')
+@JsonController('/api/auth')
 export class AuthenticationController {
   /**
    * Constructor.

@@ -1,5 +1,5 @@
-import { ChatEvent, IChatEvent } from '@/game/events/ChatEvent'
-import { IMoveEvent, MoveEvent } from '@/game/events/MoveEvent'
+import { ChatEvent, IChatEvent } from '@/game/events/player/ChatEvent'
+import { IMoveEvent, MoveEvent } from '@/game/events/player/MoveEvent'
 import { IRoom } from '@/game/rooms/IRoom'
 import { EventEmitter } from 'events'
 import { IPlayerCrumbs } from '../IEntity'

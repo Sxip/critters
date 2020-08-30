@@ -1,3 +1,5 @@
+import { UserRepository } from '@/api/repositories/user/UserRepository'
+import { RoomService } from '@/api/services/RoomService'
 import { ShopService } from '@/api/services/ShopService'
 import { PluginManager } from '@/core/PluginManager'
 import { Player } from '@/game/entities/player'
@@ -11,8 +13,6 @@ import { IncomingJoinMessage } from '@/game/messages/incoming/room/IncomingJoinM
 import { IncomingShopMessage } from '@/game/messages/incoming/shop'
 import { OutgoingShopMessage } from '@/game/messages/outgoing/shop'
 import { PlayerSocket } from '@/types/PlayerSocket'
-import { UserRepository } from '@repositories/user/UserRepository'
-import { RoomService } from '@services/RoomService'
 import { getLogger, Logger } from 'log4js'
 import { ConnectedSocket, MessageBody, OnConnect, OnDisconnect, OnMessage, SocketController } from 'socket-controllers'
 import { InjectRepository } from 'typeorm-typedi-extensions'
@@ -141,12 +141,12 @@ export class PlayerController {
    * @param message
    */
   @OnMessage(IncomingMessagesTypes.SHOP)
-  public async shop (@ConnectedSocket() socket: PlayerSocket, @MessageBody() { id }: IncomingShopMessage): Promise<void> {
-    this.logger.info(`Shop load ${id} request from ${socket.player.nickname}`)
+  public async shop (@ConnectedSocket() socket: PlayerSocket, @MessageBody() message: IncomingShopMessage): Promise<void> {
+    this.logger.info(`Shop load ${message.id} request from ${socket.player.nickname}`)
 
-    PluginManager.handleIncomingMessage(IncomingMessagesTypes.SHOP, id, socket.player)
+    PluginManager.handleIncomingMessage(IncomingMessagesTypes.SHOP, message.id, socket.player)
 
-    const shop = await this.shopService.find(id)
+    const shop = await this.shopService.find(message.id)
     if (shop) {
       socket.player.sendToSocket('getShop', new OutgoingShopMessage({
         collection: shop.collections.map(c => c.item.id) || [],
@@ -198,6 +198,17 @@ export class PlayerController {
     PluginManager.handleIncomingMessage(IncomingMessagesTypes.UPDATE_GEAR, gear, socket.player)
 
     socket.player.updateGear(gear)
+  }
+
+  /**
+   * Handles custom messages.
+   *
+   * @param socket
+   * @param message
+   */
+  @OnMessage(IncomingMessagesTypes.CUSTOM)
+  public custom (@ConnectedSocket() socket: PlayerSocket, @MessageBody() message: any): void {
+    PluginManager.handleIncomingMessage(IncomingMessagesTypes.CUSTOM, message, socket.player)
   }
 
   /**

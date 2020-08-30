@@ -28,7 +28,7 @@
                 "src/database/*"
             ],
             "@repositories/*": [
-                "src/api/repositories/*"
+                "src/http/repositories/*"
             ],
             "@models/*": [
                 "src/database/models/*"
@@ -37,10 +37,10 @@
                 "src/game/*"
             ],
             "@services/*": [
-                "src/api/services/*"
+                "src/http/services/*"
             ],
             "@validators/*": [
-                "src/api/validators/*"
+                "src/http/validators/*"
             ],
             "@config": [
                 "config/index"

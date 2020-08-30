@@ -1,15 +1,24 @@
-import { Get, JsonController } from 'routing-controllers'
+import { Controller, Get, Render } from 'routing-controllers'
 
-@JsonController()
+@Controller()
 export class IndexController {
   /**
-   * Displays the API message.
+   * Renders the index page.
    * 
    * @method GET
    * @public
    */
   @Get()
-  public index (): object {
-    return { message: 'Server API' }
-  }
+  @Render('homepage')
+  public index () { }
+
+  /**
+   * Renders the play page.
+   * 
+   * @method GET
+   * @public
+   */
+  @Get('/play')
+  @Render('play')
+  public play () { }
 }
