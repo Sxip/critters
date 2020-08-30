@@ -16,29 +16,9 @@ Critters is a server implementation of [Box Critters](https://boxcritters.com) w
 - A basic REST service.
 - Nickname colours.
 
-## Showcase
+## Screenshots
 
 ![](https://user-images.githubusercontent.com/38108408/88861470-ef49b800-d1f5-11ea-8f19-c7bce049d604.png)
-
-## Getting Started
-
-**Note** Make sure you have the following installed and setup.
-
-1. [Node.js](NodeJS) **version 13 or higher**
-2. [PostgreSQL](https://www.postgresql.org)
-3. [Yarn](https://yarnpkg.com)
-4. [Client files](https://mega.nz/file/3JQCWaTB#q_enKTUtv120YFduFvGIqZdEnC0DL8sXYTE_AmnzenQ)
-
-### Steps
-
-1. Clone the Github repository: https://github.com/sxip/critters
-2. Unzip the client files inside the `public` directory
-3. Install dependencies by navigating to the project in your Terminal or command prompt and running the command `yarn install`
-4. Go into your `config.development.json` file and configure your database connection settings
-5. Setup the migrations by running the command `yarn migration:run`
-6. Setup the seeds by running the command `yarn seed`
-
-If you have followed the steps correctlty, you can begin serving for connections by typing the command `serve:dev`.
 
 ## Rest API
 
