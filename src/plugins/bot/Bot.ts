@@ -1,7 +1,7 @@
 import { IEntityPlayer } from '@/game/entities/IEntityPlayer'
 import { PlayerBase } from '@/game/entities/player/Base'
-import { ChatEvent, IChatEvent } from '@/game/events/ChatEvent'
-import { IMoveEvent, MoveEvent } from '@/game/events/MoveEvent'
+import { ChatEvent, IChatEvent } from '@/game/events/player/ChatEvent'
+import { IMoveEvent, MoveEvent } from '@/game/events/player/MoveEvent'
 
 /**
  * Bot options interface.

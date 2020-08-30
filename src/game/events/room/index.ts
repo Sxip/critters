@@ -1,11 +1,11 @@
 import { RoomService } from '@/api/services/RoomService'
 import { Trigger, TriggerTypes } from '@/database/models/Trigger'
 import { IEntityPlayer } from '@/game/entities/IEntityPlayer'
-import { IJoinEvent, JoinEvent } from '@game/events/JoinEvent'
-import { ILeaveEvent, LeaveEvent } from '@game/events/LeaveEvent'
+import { IJoinEvent, JoinEvent } from '@game/events/room/JoinEvent'
+import { ILeaveEvent, LeaveEvent } from '@game/events/room/LeaveEvent'
 import { EventEmitter } from 'events'
 import Container from 'typedi'
-import { IRoom } from './IRoom'
+import { IRoom } from '../../rooms/IRoom'
 
 export class Room extends EventEmitter implements IRoom {
   /**

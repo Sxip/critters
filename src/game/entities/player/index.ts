@@ -1,11 +1,12 @@
 import { UserService } from '@/api/services/UserService'
 import { User } from '@/database/models/User'
-import { ChatEvent, IChatEvent } from '@/game/events/ChatEvent'
-import { IJoinEvent, JoinEvent } from '@/game/events/JoinEvent'
-import { ILeaveEvent, LeaveEvent } from '@/game/events/LeaveEvent'
-import { IMoveEvent, MoveEvent } from '@/game/events/MoveEvent'
-import { IUpdateGearEvent, UpdateGearEvent } from '@/game/events/UpdateGearEvent'
+import { ChatEvent, IChatEvent } from '@/game/events/player/ChatEvent'
+import { IMoveEvent, MoveEvent } from '@/game/events/player/MoveEvent'
+import { IUpdateGearEvent, UpdateGearEvent } from '@/game/events/player/UpdateGearEvent'
+import { IJoinEvent, JoinEvent } from '@/game/events/room/JoinEvent'
+import { ILeaveEvent, LeaveEvent } from '@/game/events/room/LeaveEvent'
 import { IncomingUpdateGearMessage } from '@/game/messages/incoming/gear'
+import { OutgoingMessagesTypes } from '@/game/messages/outgoing'
 import { OutgoingChatMessage } from '@/game/messages/outgoing/chat'
 import { OutgoingGearMessage } from '@/game/messages/outgoing/gear'
 import { OutgoingLoginMessage } from '@/game/messages/outgoing/login'
@@ -94,7 +95,7 @@ export class Player extends PlayerBase {
    * @public
    */
   public login (): void {
-    this.sendToSocket('login', new OutgoingLoginMessage({
+    this.sendToSocket(OutgoingMessagesTypes.LOGIN, new OutgoingLoginMessage({
       playerId: this.id.toString(),
       nickname: this.nickname,
       critterId: this.c,
@@ -114,7 +115,7 @@ export class Player extends PlayerBase {
    */
   private onJoinRoom (event: IJoinEvent): void {
     if (event.player !== this) {
-      this.sendToSocket('A', new OutgoingPlayerJoinMessage(
+      this.sendToSocket(OutgoingMessagesTypes.PLAYER_JOIN, new OutgoingPlayerJoinMessage(
         event.player.getCrumbs()
       ))
     } else {
@@ -122,7 +123,7 @@ export class Player extends PlayerBase {
 
       for (const player of event.room.players) playerCrumbs.push(player.getCrumbs())
 
-      this.sendToSocket('joinRoom', new OutgoingJoinMessage({
+      this.sendToSocket(OutgoingMessagesTypes.JOIN_ROOM, new OutgoingJoinMessage({
         roomId: event.room.id,
         playerCrumbs,
       }))
@@ -136,7 +137,7 @@ export class Player extends PlayerBase {
    * @private
    */
   private onMove (event: IMoveEvent): void {
-    this.sendToSocket('X', new OutgoingMovementMessage({
+    this.sendToSocket(OutgoingMessagesTypes.MOVEMENT, new OutgoingMovementMessage({
       i: event.sender.id,
       x: event.x,
       y: event.y,
@@ -151,7 +152,7 @@ export class Player extends PlayerBase {
    * @private
    */
   private onChat (event: IChatEvent): void {
-    this.sendToSocket('M', new OutgoingChatMessage({
+    this.sendToSocket(OutgoingMessagesTypes.CHAT, new OutgoingChatMessage({
       i: event.sender.id,
       n: event.sender.nickname,
       m: event.message,
@@ -165,7 +166,7 @@ export class Player extends PlayerBase {
    * @private
    */
   private onLeaveRoom (event: ILeaveEvent): void {
-    this.sendToSocket('R', new OutgoingPlayerLeaveMessage({
+    this.sendToSocket(OutgoingMessagesTypes.PLAYER_LEFT, new OutgoingPlayerLeaveMessage({
       i: event.player.id,
     }))
   }
@@ -178,10 +179,10 @@ export class Player extends PlayerBase {
    */
   private onUpdateGear (event: IUpdateGearEvent): void {
     if (event.sender === this) {
-      this.sendToSocket('updateGear', event.sender.getGear())
+      this.sendToSocket(OutgoingMessagesTypes.UPDATE_GEAR, event.sender.getGear())
     }
 
-    this.socket.emit('G', new OutgoingGearMessage({
+    this.socket.emit(OutgoingMessagesTypes.GEAR, new OutgoingGearMessage({
       i: event.sender.id.toString(),
       g: event.sender.getGear(),
     }))
