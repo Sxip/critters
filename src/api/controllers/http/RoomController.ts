@@ -1,9 +1,9 @@
-import { JsonController, Get, Param, Res } from 'routing-controllers'
+import { IPlayerResponse, IRoomResponse } from '@/api/responses/IRoomResponse'
 import { RoomService } from '@/api/services/RoomService'
+import { ApiErrorResponse } from '@/util/api/ErrorApiResponse'
+import { SuccessApiResponse } from '@/util/api/SuccessApiResponse'
 import { Response } from 'express'
-import { ApiErrorResponse } from '@/util/ErrorApiResponse'
-import { SuccessApiResponse } from '@/util/SuccessApiResponse'
-import { IRoomResponse, IPlayerResponse } from '@/api/responses/IRoomResponse'
+import { Get, JsonController, Param, Res } from 'routing-controllers'
 
 @JsonController('/api/room')
 export class RoomController {
