@@ -1,4 +1,4 @@
-import { BaseApiResponse } from './BaseApiResponse'
+import { BaseApiResponse } from './Base'
 import { HTTP_STATUS_CODE } from './HttpStatusCode'
 
 /**

@@ -17,14 +17,9 @@ const app: Application = express()
  * Configure express app.
  */
 app
-  .set('view engine', 'pug')
-  .set('views', path.join(__dirname, '..', '..', 'views', 'pages'))
-
-app
   .use(compression())
   .use(json())
   .use(urlencoded({ extended: true }))
-  .use(express.static('public'))
   .use(morgan(
     IS_DEV ? 'dev' : 'combined'
   ))

@@ -1,6 +1,6 @@
 import { Command } from '@/decorators/Command'
 import { Plugin } from '@/decorators/Plugin'
-import { ICodeEvent } from '@/game/events/CodeEvent'
+import { ICodeEvent } from '@/game/events/player/CodeEvent'
 import { Bot } from './Bot'
 
 @Plugin({

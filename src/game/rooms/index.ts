@@ -5,7 +5,7 @@ import { IJoinEvent, JoinEvent } from '@game/events/room/JoinEvent'
 import { ILeaveEvent, LeaveEvent } from '@game/events/room/LeaveEvent'
 import { EventEmitter } from 'events'
 import Container from 'typedi'
-import { IRoom } from '../../rooms/IRoom'
+import { IRoom } from './IRoom'
 
 export class Room extends EventEmitter implements IRoom {
   /**

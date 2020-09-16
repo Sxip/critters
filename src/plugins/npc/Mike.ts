@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 
 import { PlayerBase } from '@/game/entities/player/Base'
-import { IMoveEvent, MoveEvent } from '@/game/events/MoveEvent'
+import { IMoveEvent, MoveEvent } from '@/game/events/player/MoveEvent'
 
 export class Mike extends PlayerBase {
   /**
