@@ -1,4 +1,4 @@
-import { PluginManager } from '@/core/PluginManager'
+import { PluginManager } from '@/shared/PluginManager'
 
 /**
  * Command information interface.

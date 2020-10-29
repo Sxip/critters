@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryColumn } from 'typeorm'
+import { BaseEntity, Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { Item } from './Item'
 import ShopCollections from './ShopCollections'
 
@@ -9,8 +9,8 @@ export class Shop extends BaseEntity {
    *
    * @public
    */
-  @PrimaryColumn()
-  public readonly id!: string
+  @PrimaryGeneratedColumn()
+  public readonly id!: number
 
   /**
    * Shop primary key.
@@ -62,4 +62,12 @@ export class Shop extends BaseEntity {
     collection => collection.shop
   )
   public readonly collections!: ShopCollections[]
+
+  /**
+   * Start date timestamp.
+   * 
+   * @public
+   */
+  @Column({ type: 'timestamp' })
+  public readonly startDate!: Date
 }

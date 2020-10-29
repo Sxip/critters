@@ -7,8 +7,10 @@ export class CreateShops1596045102494 implements MigrationInterface {
       columns: [
         {
           name: 'id',
-          type: 'varchar',
+          type: 'bigint',
           isPrimary: true,
+          isGenerated: true,
+          generationStrategy: 'increment',
         },
         {
           name: 'name',
@@ -29,6 +31,24 @@ export class CreateShops1596045102494 implements MigrationInterface {
           name: 'last',
           type: 'varchar',
           isNullable: true,
+        },
+        {
+          name: 'start_date',
+          type: 'timestamp',
+          default: 'now()',
+          isNullable: false,
+        },
+        {
+          name: 'created_at',
+          type: 'timestamp',
+          default: 'now()',
+          isNullable: false,
+        },
+        {
+          name: 'updated_at',
+          type: 'timestamp',
+          default: 'now()',
+          isNullable: false,
         },
       ],
     }))
@@ -53,7 +73,19 @@ export class CreateShops1596045102494 implements MigrationInterface {
         },
         {
           name: 'shop',
-          type: 'varchar',
+          type: 'integer',
+          isNullable: false,
+        },
+        {
+          name: 'created_at',
+          type: 'timestamp',
+          default: 'now()',
+          isNullable: false,
+        },
+        {
+          name: 'updated_at',
+          type: 'timestamp',
+          default: 'now()',
           isNullable: false,
         },
       ],

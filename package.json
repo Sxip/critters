@@ -14,7 +14,7 @@
         "schema:sync": "cross-env ts-node-dev./node_modules/typeorm/cli.js schema:sync -f ormconfig.ts",
         "migration:run": "cross-env ts-node-dev./node_modules/typeorm/cli.js migration:run -f ormconfig.ts",
         "migration:revert": "cross-env ts-node-dev./node_modules/typeorm/cli.js migration:revert -f ormconfig.ts",
-        "seed": "ts-node-dev./node_modules/typeorm-seeding/dist/cli.js seed"
+        "seed": "ts-node-dev ./node_modules/typeorm-seeding/dist/cli.js seed"
     },
     "author": "Sxip",
     "license": "MIT",

@@ -1,7 +1,7 @@
-import { IPlayerResponse, IRoomResponse } from '@/api/responses/IRoomResponse'
 import { RoomService } from '@/api/services/RoomService'
-import { ApiErrorResponse } from '@/util/api/ErrorApiResponse'
-import { SuccessApiResponse } from '@/util/api/SuccessApiResponse'
+import { HTTP_STATUS_CODE } from '@/shared/builders/response/BaseApiResponse'
+import { ErrorResponse } from '@/shared/builders/response/ErrorResponse'
+import { SuccessResponse } from '@/shared/builders/response/SuccessResponse'
 import { Response } from 'express'
 import { Get, JsonController, Param, Res } from 'routing-controllers'
 
@@ -26,31 +26,17 @@ export class RoomController {
    */
   @Get('/:id')
   public async room (@Res() response: Response, @Param('id') id: string): Promise<Response> {
-    console.log
-    const room = this.roomService.find(id)
+    try {
+      const room = this.roomService.findWithPlayers(id)
 
-    if (!room) {
-      return new ApiErrorResponse(response)
-        .withError('Room not found.')
+      return new SuccessResponse(response)
+        .withData(room)
+        .build()
+    } catch (error) {
+      return new ErrorResponse(response)
+        .withError(error.message)
+        .withStatus(HTTP_STATUS_CODE.NOT_FOUND)
         .build()
     }
-
-    const players: IPlayerResponse[] = []
-
-    for (const critter of room.players) {
-      players.push({
-        id: critter.id,
-        nickname: critter.nickname,
-        x: critter.x,
-        y: critter.y,
-      })
-    }
-
-    return new SuccessApiResponse(response)
-      .withData({
-        id: room.id,
-        players,
-      } as IRoomResponse)
-      .build()
   }
 }
