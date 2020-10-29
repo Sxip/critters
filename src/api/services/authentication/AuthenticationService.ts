@@ -1,4 +1,6 @@
 import { UserRepository } from '@/api/repositories/user/UserRepository'
+import { ILoginResponse } from '@/api/responses/ILoginResponse'
+import { IRegisterResponse } from '@/api/responses/IRegisterResponse'
 import { Service } from 'typedi'
 import { InjectRepository } from 'typeorm-typedi-extensions'
 
@@ -20,12 +22,12 @@ export class AuthenticationService {
    * @param nickname 
    * @param password 
    */
-  public async loginWithNickname (nickname: string, password: string): Promise<object> {
+  public async loginWithNickname (nickname: string, password: string): Promise<ILoginResponse> {
     const user = await this.userRepository.findByNickname(nickname)
-    if (!user) return { error: 'User not found!' }
+    if (!user) throw new Error('User not found.')
 
     const verifyPassword = await user.verify(password)
-    if (!verifyPassword) return { error: 'Invalid password!' }
+    if (!verifyPassword) throw new Error('Invalid password.')
 
     await user.refreshTicket()
 
@@ -42,9 +44,9 @@ export class AuthenticationService {
    * @param nickname 
    * @param password 
    */
-  public async register (nickname: string, password: string): Promise<object> {
-    const exists = await this.userRepository.findByNickname(nickname)
-    if (exists) return { error: 'User already exists!' }
+  public async register (nickname: string, password: string): Promise<IRegisterResponse> {
+    const exists = await this.userRepository.count({ where: { nickname }})
+    if (exists) throw new Error('User already exists.')
 
     const { nickname: name, ticket } = await this.userRepository.save({
       nickname,

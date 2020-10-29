@@ -1,4 +1,4 @@
-import { PluginManager } from '@/core/PluginManager'
+import { PluginManager } from '@/shared/PluginManager'
 
 /**
  * Incoming message information interface.

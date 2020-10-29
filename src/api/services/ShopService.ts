@@ -24,4 +24,14 @@ export class ShopService {
   public async find (id: string): Promise<Shop | undefined> {
     return this.shopRepository.findById(id)
   }
+
+  /**
+   * Recieves all of the shops.
+   * 
+   * @public
+   */
+  public async getAll () {
+    const test = await this.shopRepository.find()
+    console.log(test)
+  }
 }

@@ -1,13 +1,13 @@
-import 'reflect-metadata'
-import '@/config/Logger'
-import '@/config/Ioc'
-
 import { RoomService } from '@/api/services/RoomService'
 import { ENV, PORT } from '@/config/Env'
+import '@/config/Ioc'
+import '@/config/Logger'
 import { server } from '@/config/Socket.io'
-import { PluginManager } from '@/core/PluginManager'
 import { database } from '@/database'
+import { PluginManager } from '@/shared/PluginManager'
+import 'reflect-metadata'
 import Container from 'typedi'
+
 
 /**
  * Initializes the application.

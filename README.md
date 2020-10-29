@@ -11,10 +11,10 @@ Critters is a server implementation of [Box Critters](https://boxcritters.com) w
 
 ## Features
 
-- Plugin Support (Getting there...).
-- Multiplayer support.
-- A basic REST service.
-- Nickname colours.
+- Plugin Support (Getting there...)
+- Multiplayer support
+- A basic REST service
+- Nickname colours
 
 ## Screenshot
 
