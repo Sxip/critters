@@ -26,7 +26,7 @@ const ormconfig: IConnectionOptions = {
   logging: false,
   synchronize: false,
   entities: [
-    'src/database/models/*.{ts,js}',
+    'src/database/models/**/*.{ts,js}',
   ],
   subscribers: [
     'src/database/subscribers/*.{ts,js}',

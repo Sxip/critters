@@ -1,5 +1,5 @@
 import { BaseEntity, Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
-import { Item } from './Item'
+import { Item } from '../Item'
 import ShopCollections from './ShopCollections'
 
 @Entity('shops')

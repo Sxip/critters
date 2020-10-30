@@ -1,5 +1,5 @@
 import { UserService } from '@/api/services/UserService'
-import { User } from '@/database/models/User'
+import { User } from '@/database/models/user'
 import { ChatEvent, IChatEvent } from '@/game/events/player/ChatEvent'
 import { IMoveEvent, MoveEvent } from '@/game/events/player/MoveEvent'
 import { IUpdateGearEvent, UpdateGearEvent } from '@/game/events/player/UpdateGearEvent'

@@ -1,4 +1,4 @@
-import { Room } from '@/database/models/Room'
+import { Room } from '@/database/models/room'
 import { EntityRepository, Repository } from 'typeorm'
 import { IRoomRepository } from './IRoomRepository'
 

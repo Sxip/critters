@@ -1,4 +1,4 @@
-import { Trigger } from '@/database/models/Trigger'
+import { Trigger } from '@/database/models/room/Trigger'
 import { IEntityPlayer } from '@game/entities/IEntityPlayer'
 
 /**

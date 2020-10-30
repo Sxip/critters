@@ -1,6 +1,6 @@
 import { Connection } from 'typeorm'
 import { Factory, Seeder } from 'typeorm-seeding'
-import { Trigger, TriggerTypes } from '../models/Trigger'
+import { Trigger, TriggerTypes } from '../models/room/Trigger'
 
 export default class CreateRoomsTriggers implements Seeder {
   public async run (factory: Factory, connection: Connection): Promise<void> {

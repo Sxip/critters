@@ -1,4 +1,4 @@
-import { Shop } from '@models/Shop'
+import { Shop } from '@/database/models/shop/Shop'
 import { EntityRepository, Repository } from 'typeorm'
 import { IShopRepository } from './IShopRepository'
 
