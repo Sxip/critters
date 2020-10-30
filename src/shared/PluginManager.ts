@@ -74,7 +74,7 @@ export class PluginManager {
    */
   public static loadPlugin<T>(plugin: ILoadedPlugin<T>): void {
     if (this.plugins.has(plugin.target.name)) {
-      return this.logger.error(`Plugin with the name ${plugin.target.name} already exists!`)
+      return this.logger.error(`Plugin with the name ${plugin.target.name} already exists.`)
     }
 
     const instance = new plugin.target()
@@ -93,7 +93,7 @@ export class PluginManager {
    */
   public static loadCommand (command: ICommandInformation): void {
     if (this.commands.has(command.name)) {
-      return this.logger.error(`Command ${command.name} already exists!`)
+      return this.logger.error(`Command ${command.name} already exists.`)
     }
 
     this.commands.set(command.name, {
@@ -111,7 +111,7 @@ export class PluginManager {
    */
   public static loadIncomingMessage (message: IIncomingMessageInformation): void {
     if (this.incoming.has(message.type)) {
-      return this.logger.error(`Command ${message.type} already exists!`)
+      return this.logger.error(`Command ${message.type} already exists.`)
     }
 
     if (!this.incoming.has(message.type)) this.incoming.set(message.type, [])
@@ -140,7 +140,7 @@ export class PluginManager {
         try {
           target.instance[command.method].call(target.instance, event)
         } catch (error) {
-          this.logger.error(`Failed handling command! ${error.message}`)
+          this.logger.error(`Failed handling command. ${error.message}`)
         }
       }
     }
@@ -165,7 +165,7 @@ export class PluginManager {
           try {
             target.instance[hook.method].call(target.instance, message, player)
           } catch (error) {
-            this.logger.error(`Failed handling incoming message hooks! ${error.message}`)
+            this.logger.error(`Failed handling incoming message hooks. ${error.message}`)
           }
         }
       }
