@@ -8,7 +8,6 @@ import { PluginManager } from '@/shared/PluginManager'
 import 'reflect-metadata'
 import Container from 'typedi'
 
-
 /**
  * Initializes the application.
  *
