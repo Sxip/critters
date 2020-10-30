@@ -1,4 +1,4 @@
-import { Shop } from '@models/Shop'
+import { Shop } from '@/database/models/shop/Shop'
 import { Service } from 'typedi'
 import { InjectRepository } from 'typeorm-typedi-extensions'
 import { ShopRepository } from '../repositories/shop/ShopRepository'

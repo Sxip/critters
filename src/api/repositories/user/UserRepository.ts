@@ -1,4 +1,4 @@
-import { User } from '@models/User'
+import { User } from '@models/user'
 import { EntityRepository, Repository } from 'typeorm'
 import { IUserRepository } from './IUserRepository'
 

@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm'
-import { Room } from './Room'
+import { Room } from './index'
 
 /**
  * Trigger types.

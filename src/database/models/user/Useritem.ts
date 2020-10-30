@@ -1,6 +1,6 @@
 import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
-import { Item } from './Item'
-import { User } from './User'
+import { Item } from '../Item'
+import { User } from './index'
 
 @Entity('users_items')
 export class UserItem extends BaseEntity {

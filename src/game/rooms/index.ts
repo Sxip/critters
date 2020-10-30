@@ -1,5 +1,5 @@
 import { RoomService } from '@/api/services/RoomService'
-import { Trigger, TriggerTypes } from '@/database/models/Trigger'
+import { Trigger, TriggerTypes } from '@/database/models/room/Trigger'
 import { IEntityPlayer } from '@/game/entities/IEntityPlayer'
 import { IJoinEvent, JoinEvent } from '@game/events/room/JoinEvent'
 import { ILeaveEvent, LeaveEvent } from '@game/events/room/LeaveEvent'
