@@ -59,7 +59,7 @@
         "reflect-metadata": "^0.1.13",
         "routing-controllers": "^0.8.1-alpha.2",
         "socket-controllers": "^0.0.5",
-        "socket.io": "^2.3.0",
+        "socket.io": "^2.4.0",
         "swig-email-templates": "^5.0.1",
         "typedi": "^0.8.0",
         "typeorm": "0.2.22",
