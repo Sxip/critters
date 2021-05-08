@@ -62,7 +62,7 @@
         "socket.io": "^2.3.0",
         "swig-email-templates": "^5.0.1",
         "typedi": "^0.8.0",
-        "typeorm": "0.2.22",
+        "typeorm": "0.2.25",
         "typeorm-naming-strategies": "^1.1.0",
         "typeorm-seeding": "^1.5.0",
         "uuid": "^7.0.3"
